@@ -55,6 +55,7 @@ public class Main extends Application {
                 System.err.println("resultScene.fxml not found!");
                 System.exit(1);
             }
+
             FXMLLoader loader = new FXMLLoader(fxmlLocation);
             AnchorPane resultScene = loader.load();
             UserOutputController controller = loader.getController();
