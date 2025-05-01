@@ -184,11 +184,106 @@ public class Controller implements Initializable {
                 runcommandfield.setText(JavaCompiler.RUN_COMMAND);
                 break;
             case "Python":
-                compilerPathfield.setText(PythonInterpreter.COMPILER_PATH);
-                compilerInterpreterargsfield.setText(PythonInterpreter.ARGS);
+                compilerPathfield.setText(PythonCompiler.COMPILER_PATH);
+                compilerInterpreterargsfield.setText(PythonCompiler.ARGS);
                 runcommandfield.setText("");
                 break;
             default:
                 break;
         }
+    }
+
+    @FXML
+    public List<UserOutputScene> runButtonClicked() throws IOException {
+        List<UserOutputScene> results = new ArrayList<>();
+        String runOutput = null;
+        String expectedOutput = null;
+        String result = null;
+        String path = pathtextField.getText();
+        String expectedPath = expectedOutcomepathfield.getText();
+
+        List<String> extractedFolders = new ArrayList<>();
+        ZipExtractor zipExtractor = new ZipExtractor();
+        extractedFolders = zipExtractor.extract(path);
+
+        for (String folder : extractedFolders) {
+            switch (mychoiceBox.getSelectionModel().getSelectedItem()) {
+                case "C":
+                    runOutput = compileAndRunC(adjustPath(path, folder));
+                    expectedOutput = compileAndRunC(expectedPath);
+                    break;
+                case "C++":
+                    runOutput = compileAndRunCpp(adjustPath(path, folder));
+                    expectedOutput = compileAndRunCpp(expectedPath);
+                    break;
+                case "Python":
+                    runOutput = runPythonInterpreter(adjustPath(path, folder));
+                    expectedOutput = runPythonInterpreter(expectedPath);
+                    break;
+                case "JAVA":
+                    runOutput = compileAndRunJava(adjustPath(path, folder));
+                    expectedOutput = compileAndRunJava(expectedPath);
+                    break;
+                default:
+                    throw new UnsupportedOperationException("Unsupported language selected");
+            }
+
+            result = runOutput.equals(expectedOutput) ? "Correct" : "Incorrect";
+            results.add(new UserOutputScene(adjustPath(path, folder), runOutput, expectedOutput, result));
+        }
+        return results;
+    }
+
+    private String adjustPath(String path, String folder) {
+        return path + "\\" + folder;
+    }
+
+    @FXML
+    public String runPythonCompiler(String filePath) {
+        File workingDirectory = new File(filePath);
+        PythonCompiler pythonCompiler = new PythonCompiler(workingDirectory);
+
+        try {
+            Result runResult = pythonCompiler.run(compilerPathfield.getText(), compilerInterpreterargsfield.getText());
+            return runResult.getOutput();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "-1";
+    }
+
+    @FXML
+    public String compileAndRunJava(String filePath) {
+        File workingDirectory = new File(filePath);
+        JavaCompiler javaCompiler = new JavaCompiler(workingDirectory);
+
+        try {
+            Result compileResult = javaCompiler.compile(compilerPathfield.getText(), compilerInterpreterargsfield.getText());
+
+            if (compileResult.getStatus() == 0) {
+                Result runResult = javaCompiler.run(runcommandfield.getText(), "");
+                return runResult.getOutput();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "-2";
+    }
+
+    @FXML
+    public String compileAndRunC(String filePath) {
+        File workingDirectory = new File(filePath);
+        CCompiler cCompiler = new CCompiler(workingDirectory);
+
+        try {
+            Result compileResult = cCompiler.compile(compilerPathfield.getText(), compilerInterpreterargsfield.getText());
+
+            if (compileResult.getStatus() == 0) {
+                Result runResult = cCompiler.run(workingDirectory + runcommandfield.getText(), "");
+                return runResult.getOutput();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "-3";
     }
