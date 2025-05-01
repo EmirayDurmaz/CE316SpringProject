@@ -1,0 +1,10 @@
+{
+  "Requirements" : [ {
+    "Language" : "JAVA",
+    "chooseFile" : "",
+    "compilerPath" : "javac",
+    "compiler" : "Test.java",
+    "runCommand" : "java Test",
+    "expected" : ""
+  } ]
+}

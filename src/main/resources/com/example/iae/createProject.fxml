@@ -10,24 +10,24 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.iae.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.iae.Controller">
     <bottom>
-        <HBox alignment="CENTER" prefHeight="57.0" prefWidth="600.0" spacing="10.0" style="-fx-background-color: #838b83;" BorderPane.alignment="CENTER">
+        <HBox alignment="CENTER" prefHeight="57.0" prefWidth="600.0" spacing="10.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
             <children>
-                <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="49.0" text="Saves" textFill="#e8e0a7">
+                <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="49.0" text="Saves" textFill="#333333">
                     <font>
                         <Font size="18.0" />
                     </font>
                 </Label>
                 <ChoiceBox fx:id="savesChoiceBox" onAction="#loadSelectedJson" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #e8e0a7;" />
-                <Button mnemonicParsing="false" onAction="#json" style="-fx-background-color: #e8e0a7;" text="Save Configuration" />
-                <Button mnemonicParsing="false" onAction="#clearJson" style="-fx-background-color: #e8e0a7;" text="Delete Configuration">
+                <Button mnemonicParsing="false" onAction="#json" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 2, 2);" text="Save Configuration" />
+                <Button mnemonicParsing="false" onAction="#clearJson" style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 2, 2);" text="Delete Configuration">
                     <HBox.margin>
                         <Insets />
                     </HBox.margin>
                 </Button>
-                <Button fx:id="okeyButton" mnemonicParsing="false" onAction="#runButtonClicked" style="-fx-background-color: #e8e0a7;" text="Run" />
-                <Button fx:id="refreshButton" mnemonicParsing="false" style="-fx-background-color: #e8e0a7;" text="Refresh">
+                <Button fx:id="okeyButton" mnemonicParsing="false" onAction="#runButtonClicked" style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 2, 2);" text="Run" />
+                <Button fx:id="refreshButton" mnemonicParsing="false" style="-fx-background-color: #FFC107; -fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 2, 2);" text="Refresh">
                     <HBox.margin>
                         <Insets />
                     </HBox.margin>
@@ -36,9 +36,9 @@
         </HBox>
     </bottom>
     <top>
-        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #838b83;" BorderPane.alignment="CENTER">
+        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
             <children>
-                <Label prefWidth="150.0" text="Select Language" textFill="#e8e0a7">
+                <Label prefWidth="150.0" text="Select Language" textFill="#333333">
                     <font>
                         <Font size="18.0" />
                     </font>
@@ -51,7 +51,7 @@
                         <Insets left="10.0" top="40.0" />
                     </HBox.margin>
                 </ChoiceBox>
-                <Label prefHeight="27.0" prefWidth="31.0" text="IAE" textFill="#e8e0a7">
+                <Label prefHeight="27.0" prefWidth="31.0" text="IAE" textFill="#333333">
                     <HBox.margin>
                         <Insets left="280.0" top="10.0" />
                     </HBox.margin>
@@ -67,17 +67,17 @@
             <children>
                 <Button layoutX="394.0" layoutY="29.0" mnemonicParsing="false" onAction="#pathDirectoryChooser" text="..." />
                 <TextField fx:id="pathtextField" layoutX="190.0" layoutY="28.0" prefHeight="25.0" prefWidth="193.0" />
-                <Label layoutX="14.0" layoutY="32.0" text="Choose Student Directory" />
+                <Label layoutX="14.0" layoutY="32.0" text="Choose Student Directory" textFill="#333333" />
                 <TextField fx:id="compilerPathfield" layoutX="190.0" layoutY="64.0" prefHeight="25.0" prefWidth="193.0" />
                 <TextField fx:id="compilerInterpreterargsfield" layoutX="190.0" layoutY="99.0" prefHeight="25.0" prefWidth="193.0" />
-                <Label layoutX="14.0" layoutY="68.0" text="Compiler/Interpreter" />
-                <Label layoutX="14.0" layoutY="103.0" text="Arguments" />
-                <Label layoutX="14.0" layoutY="136.0" text="Run Command" />
+                <Label layoutX="14.0" layoutY="68.0" text="Compiler/Interpreter" textFill="#333333" />
+                <Label layoutX="14.0" layoutY="103.0" text="Arguments" textFill="#333333" />
+                <Label layoutX="14.0" layoutY="136.0" text="Run Command" textFill="#333333" />
                 <TextField fx:id="runcommandfield" layoutX="190.0" layoutY="132.0" prefHeight="25.0" prefWidth="194.0" />
-                <Label layoutX="14.0" layoutY="169.0" text="Expected Outcome Directory" />
+                <Label layoutX="14.0" layoutY="169.0" text="Expected Outcome Directory" textFill="#333333" />
                 <TextField fx:id="expectedOutcomepathfield" layoutX="190.0" layoutY="164.0" prefHeight="26.0" prefWidth="194.0" />
                 <Button fx:id="expectedoutcomeChooser" layoutX="394.0" layoutY="164.0" mnemonicParsing="false" onAction="#expectedDirectoryChooser" text="..." />
-                <Button fx:id="helpBtn" layoutX="507.0" layoutY="204.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="53.0" style="-fx-background-color: #e8e0a7;" text="Help" />
+                <Button fx:id="helpBtn" layoutX="507.0" layoutY="204.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="53.0" style="-fx-background-color: #2196F3; -fx-text-fill: white;" text="Help" />
             </children>
         </AnchorPane>
     </center>
