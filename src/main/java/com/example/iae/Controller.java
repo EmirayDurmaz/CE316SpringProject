@@ -122,3 +122,73 @@ public class Controller implements Initializable {
             }
         });
     }
+    public static void showHelp(String content, String header) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("HELP");
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+    @FXML
+    public void pathDirectoryChooser(ActionEvent event) {
+        Node source = (Node) event.getSource();
+        Window window = source.getScene().getWindow();
+
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File selectedDirectory = directoryChooser.showDialog(window);
+
+        if (selectedDirectory != null) {
+            String directoryPath = selectedDirectory.getAbsolutePath();
+            pathtextField.setText(directoryPath);
+            System.out.println("Selected directory path: " + directoryPath);
+        } else {
+            System.out.println("No directory selected");
+        }
+    }
+
+    @FXML
+    public void expectedDirectoryChooser(ActionEvent event) {
+        Node source = (Node) event.getSource();
+        Window window = source.getScene().getWindow();
+
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File selectedDirectory = directoryChooser.showDialog(window);
+        if (selectedDirectory != null) {
+            String directoryPath = selectedDirectory.getAbsolutePath();
+            expectedOutcomepathfield.setText(directoryPath);
+            System.out.println("Selected directory path: " + directoryPath);
+        } else {
+            System.out.println("No directory selected");
+        }
+    }
+
+    @FXML
+    public void choiceBoxChanged(ActionEvent event) {
+        String selectedLanguage = mychoiceBox.getSelectionModel().getSelectedItem();
+
+        switch (selectedLanguage) {
+            case "C":
+                compilerPathfield.setText(CCompiler.COMPILER_PATH);
+                compilerInterpreterargsfield.setText(CCompiler.ARGS);
+                runcommandfield.setText(CCompiler.RUN_COMMAND);
+                break;
+            case "C++":
+                compilerPathfield.setText(CppCompiler.COMPILER_PATH);
+                compilerInterpreterargsfield.setText(CppCompiler.ARGS);
+                runcommandfield.setText(CppCompiler.RUN_COMMAND);
+                break;
+            case "JAVA":
+                compilerPathfield.setText(JavaCompiler.COMPILER_PATH);
+                compilerInterpreterargsfield.setText(JavaCompiler.ARGS);
+                runcommandfield.setText(JavaCompiler.RUN_COMMAND);
+                break;
+            case "Python":
+                compilerPathfield.setText(PythonInterpreter.COMPILER_PATH);
+                compilerInterpreterargsfield.setText(PythonInterpreter.ARGS);
+                runcommandfield.setText("");
+                break;
+            default:
+                break;
+        }
+    }
