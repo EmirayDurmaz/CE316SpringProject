@@ -217,8 +217,8 @@ public class Controller implements Initializable {
                     expectedOutput = compileAndRunCpp(expectedPath);
                     break;
                 case "Python":
-                    runOutput = runPythonInterpreter(adjustPath(path, folder));
-                    expectedOutput = runPythonInterpreter(expectedPath);
+                    runOutput = runPythonCompiler(adjustPath(path, folder));
+                    expectedOutput = runPythonCompiler(expectedPath);
                     break;
                 case "JAVA":
                     runOutput = compileAndRunJava(adjustPath(path, folder));
@@ -287,3 +287,152 @@ public class Controller implements Initializable {
         }
         return "-3";
     }
+    @FXML
+    public String compileAndRunCpp(String filePath) {
+        File workingDirectory = new File(filePath);
+        CppCompiler cppCompiler = new CppCompiler(workingDirectory);
+
+        try {
+            Result compileResult = cppCompiler.compile(compilerPathfield.getText(), compilerInterpreterargsfield.getText());
+
+            if (compileResult.getStatus() == 0) {
+                Result runResult = cppCompiler.run(workingDirectory + runcommandfield.getText(), "");
+                return runResult.getOutput();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "-4";
+    }
+
+    public void json() {
+        String folderPath = "JSONFiles";
+        File directory = new File(folderPath);
+
+        // JSONFiles dizini yoksa oluştur
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        try {
+            String jsonFileName = "JsonFile_" + System.currentTimeMillis() + ".json";
+            String jsonFilePath = folderPath + File.separator + jsonFileName;
+
+            JsonNode jsonData = objectMapper.createObjectNode();
+
+            JsonNode data = objectMapper.createObjectNode()
+                    .put("Language", mychoiceBox.getSelectionModel().getSelectedItem())
+                    .put("chooseFile", pathtextField.getText())
+                    .put("compilerPath", compilerPathfield.getText())
+                    .put("compiler", compilerInterpreterargsfield.getText())
+                    .put("runCommand", runcommandfield.getText())
+                    .put("expected", expectedOutcomepathfield.getText());
+
+            List<JsonNode> infos = new ArrayList<>();
+            infos.add(data);
+
+            ((ObjectNode) jsonData).set("Requirements", objectMapper.valueToTree(infos));
+
+            ObjectWriter writer = objectMapper.writerWithDefaultPrettyPrinter();
+            writer.writeValue(new File(jsonFilePath), jsonData);
+
+            System.out.println("Added to JSON: " + data.toString());
+
+            // SavesChoiceBox'ı güncelle
+            savesChoiceBox.getItems().clear();
+            savesChoiceBox.getItems().addAll(getFilenames("JSONFiles"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveResultToJson(String path, String runOutput, String expectedOutput, String result) {
+        String fileName = "results.json";
+        File file = new File(fileName);
+        JSONArray jsonArray;
+
+        if (file.exists()) {
+            try {
+                String content = new String(Files.readAllBytes(Paths.get(fileName)));
+                jsonArray = new JSONArray(content);
+            } catch (IOException e) {
+                jsonArray = new JSONArray();
+            }
+        } else {
+            jsonArray = new JSONArray();
+        }
+        int index = jsonArray.length();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("index", index);
+        jsonObject.put("path", path);
+        jsonObject.put("runOutput", runOutput);
+        jsonObject.put("expectedOutput", expectedOutput);
+        jsonObject.put("result", result);
+
+        jsonArray.put(jsonObject);
+
+        try (FileWriter fileWriter = new FileWriter(fileName)) {
+            fileWriter.write(jsonArray.toString(4));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void loadSelectedJson(ActionEvent event) {
+        String selectedJsonFileName = savesChoiceBox.getSelectionModel().getSelectedItem();
+        String selectedJsonFilePath = "JSONFiles" + File.separator + selectedJsonFileName;
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            JsonNode rootNode = objectMapper.readTree(new File(selectedJsonFilePath));
+
+            String language = rootNode.path("Requirements").path(0).path("Language").asText();
+            String chooseFile = rootNode.path("Requirements").path(0).path("chooseFile").asText();
+            String compilerPath = rootNode.path("Requirements").path(0).path("compilerPath").asText();
+            String interpreterArgs = rootNode.path("Requirements").path(0).path("compiler").asText();
+            String runCommand = rootNode.path("Requirements").path(0).path("runCommand").asText();
+            String expected = rootNode.path("Requirements").path(0).path("expected").asText();
+
+            mychoiceBox.getSelectionModel().select(language);
+            pathtextField.setText(chooseFile);
+            compilerPathfield.setText(compilerPath);
+            compilerInterpreterargsfield.setText(interpreterArgs);
+            runcommandfield.setText(runCommand);
+            expectedOutcomepathfield.setText(expected);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void clearJson() {
+        String selectedJsonFileName = savesChoiceBox.getSelectionModel().getSelectedItem();
+        String selectedJsonFilePath = "JSONFiles" + File.separator + selectedJsonFileName;
+
+        try {
+            File file = new File(selectedJsonFilePath);
+            if (file.delete()) {
+                System.out.println("Selected JSON file has been deleted successfully.");
+            } else {
+                System.out.println("Failed to delete the selected JSON file.");
+            }
+
+            mychoiceBox.getSelectionModel().clearSelection();
+            pathtextField.clear();
+            compilerPathfield.clear();
+            compilerInterpreterargsfield.clear();
+            runcommandfield.clear();
+            expectedOutcomepathfield.clear();
+
+            savesChoiceBox.getItems().remove(selectedJsonFileName);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
