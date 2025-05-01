@@ -20,24 +20,24 @@ public class UserOutputController implements Initializable {
     public UserOutputController() {}
 
     @FXML
-    private TableView<ResultSceneClass> resultsTable;
+    private TableView<UserOutputScene> resultsTable;
 
     @FXML
-    private TableColumn<ResultSceneClass, String> path;
+    private TableColumn<UserOutputScene, String> path;
 
     @FXML
-    private TableColumn<ResultSceneClass, String> expectedOutput;
+    private TableColumn<UserOutputScene, String> expectedOutput;
 
     @FXML
-    private TableColumn<ResultSceneClass, String> output;
+    private TableColumn<UserOutputScene, String> output;
 
     @FXML
     private Button helpButton2;
 
     @FXML
-    private TableColumn<ResultSceneClass, String> result;
+    private TableColumn<UserOutputScene, String> result;
 
-    ObservableList<ResultSceneClass> resultsList = FXCollections.observableArrayList();
+    ObservableList<UserOutputScene> resultsList = FXCollections.observableArrayList();
     Set<String> uniquePaths = new HashSet<>();
 
     @Override
@@ -69,7 +69,7 @@ public class UserOutputController implements Initializable {
 
     public void addResult(String path, String output, String expectedOutput, String result) {
         if (uniquePaths.add(path)) { // Only add if the path is unique
-            ResultSceneClass resultSceneClass = new ResultSceneClass(path, output, expectedOutput, result);
+            UserOutputScene resultSceneClass = new UserOutputScene(path, output, expectedOutput, result);
             resultsList.add(resultSceneClass);
         }
     }
