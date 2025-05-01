@@ -1,4 +1,4 @@
-package org.example.iae;
+package com.example.iae;
 
 public class HomeworkSub {
     private final String expected;

@@ -1,4 +1,4 @@
-package org.example.iae;
+package com.example.iae;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

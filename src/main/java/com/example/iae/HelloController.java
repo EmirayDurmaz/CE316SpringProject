@@ -1,4 +1,4 @@
-package org.example.iae;
+package com.example.iae;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

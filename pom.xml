@@ -70,7 +70,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                org.example.integratedassignmentenviroment/org.example.iae.HelloApplication
+                                org.example.integratedassignmentenviroment/com.example.iae.HelloApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
