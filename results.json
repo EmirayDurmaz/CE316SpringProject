@@ -1,0 +1,51 @@
+[
+    {
+        "result": "Correct",
+        "path": "deneme",
+        "index": 0,
+        "runOutput": "-2",
+        "expectedOutput": "-2"
+    },
+    {
+        "result": "Correct",
+        "path": "deneme",
+        "index": 1,
+        "runOutput": "-2",
+        "expectedOutput": "-2"
+    },
+    {
+        "result": "Correct",
+        "path": "deneme",
+        "index": 2,
+        "runOutput": "-2",
+        "expectedOutput": "-2"
+    },
+    {
+        "result": "Correct",
+        "path": "deneme",
+        "index": 3,
+        "runOutput": "-2",
+        "expectedOutput": "-2"
+    },
+    {
+        "result": "Correct",
+        "path": "deneme",
+        "index": 4,
+        "runOutput": "-2",
+        "expectedOutput": "-2"
+    },
+    {
+        "result": "Correct",
+        "path": "deneme",
+        "index": 5,
+        "runOutput": "-2",
+        "expectedOutput": "-2"
+    },
+    {
+        "result": "Incorrect",
+        "path": "20210602031",
+        "index": 6,
+        "runOutput": "Hello world!BERKKKK\n",
+        "expectedOutput": "-2"
+    }
+]
