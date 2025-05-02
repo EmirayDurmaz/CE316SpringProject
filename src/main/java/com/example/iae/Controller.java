@@ -245,6 +245,7 @@ public class Controller implements Initializable {
 
         try {
             Result runResult = pythonCompiler.run(compilerPathfield.getText(), compilerInterpreterargsfield.getText());
+            System.out.println("Run Output: " + runResult.getOutput());
             return runResult.getOutput();
         } catch (Exception e) {
             e.printStackTrace();

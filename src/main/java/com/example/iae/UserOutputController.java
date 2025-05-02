@@ -68,9 +68,16 @@ public class UserOutputController implements Initializable {
     }
 
     public void addResult(String path, String output, String expectedOutput, String result) {
+
+        for (UserOutputScene existing : resultsList) {
+            if (existing.getPath().equals(path)) {
+                return;
+            }
+        }
         UserOutputScene resultSceneClass = new UserOutputScene(path, output, expectedOutput, result);
         resultsList.add(resultSceneClass);
     }
+
 
     public void showAllResults() {
         try {
