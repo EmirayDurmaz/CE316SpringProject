@@ -1,0 +1,6 @@
+[{
+    "result": "Incorrect",
+    "path": "20210602031",
+    "runOutput": "Hello world!BERKKKK\n",
+    "expectedOutput": "Sinem\n"
+}]

@@ -258,16 +258,28 @@ public class Controller implements Initializable {
         JavaCompiler javaCompiler = new JavaCompiler(workingDirectory);
 
         try {
+            System.out.println("Compile Path: " + compilerPathfield.getText());
+            System.out.println("Run Command: " + runcommandfield.getText());
+
             Result compileResult = javaCompiler.compile(compilerPathfield.getText(), compilerInterpreterargsfield.getText());
+            System.out.println("Compile Output: " + compileResult.getOutput());
+            System.out.println("Compile Status: " + compileResult.getStatus());
 
             if (compileResult.getStatus() == 0) {
                 Result runResult = javaCompiler.run(runcommandfield.getText(), "");
-                return runResult.getOutput();
+                System.out.println("Run Output: " + runResult.getOutput());
+                System.out.println("Run Status: " + runResult.getStatus());
+                return runResult.getOutput(); // Çıktıyı döndür
+            } else {
+                System.err.println("Compilation failed. Output: " + compileResult.getOutput());
+                return "-2";
             }
         } catch (Exception e) {
             e.printStackTrace();
+            return "-2";
         }
-        return "-2";
+
+
     }
 
     @FXML
@@ -351,27 +363,12 @@ public class Controller implements Initializable {
 
     public void saveResultToJson(String path, String runOutput, String expectedOutput, String result) {
         String fileName = "results.json";
-        File file = new File(fileName);
-        JSONArray jsonArray;
-
-        if (file.exists()) {
-            try {
-                String content = new String(Files.readAllBytes(Paths.get(fileName)));
-                jsonArray = new JSONArray(content);
-            } catch (IOException e) {
-                jsonArray = new JSONArray();
-            }
-        } else {
-            jsonArray = new JSONArray();
-        }
-        int index = jsonArray.length();
+        JSONArray jsonArray = new JSONArray(); // Her seferinde yeni bir dizi oluştur
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("index", index);
         jsonObject.put("path", path);
         jsonObject.put("runOutput", runOutput);
         jsonObject.put("expectedOutput", expectedOutput);
         jsonObject.put("result", result);
-
         jsonArray.put(jsonObject);
 
         try (FileWriter fileWriter = new FileWriter(fileName)) {

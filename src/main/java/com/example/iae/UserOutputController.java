@@ -68,10 +68,8 @@ public class UserOutputController implements Initializable {
     }
 
     public void addResult(String path, String output, String expectedOutput, String result) {
-        if (uniquePaths.add(path)) { // Only add if the path is unique
-            UserOutputScene resultSceneClass = new UserOutputScene(path, output, expectedOutput, result);
-            resultsList.add(resultSceneClass);
-        }
+        UserOutputScene resultSceneClass = new UserOutputScene(path, output, expectedOutput, result);
+        resultsList.add(resultSceneClass);
     }
 
     public void showAllResults() {
