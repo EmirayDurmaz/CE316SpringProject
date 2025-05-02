@@ -31,7 +31,8 @@ public class ZipExtractor {
                 ZipEntry zipEntry;
 
                 while ((zipEntry = zipInputStream.getNextEntry()) != null) {
-                    File outputFile = new File(outputDir, zipEntry.getName());
+                    File outputFile = new File(outputDir, new File(zipEntry.getName()).getName());
+
 
                     if (zipEntry.isDirectory()) {
                         outputFile.mkdirs();

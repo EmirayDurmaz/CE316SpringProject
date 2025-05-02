@@ -175,9 +175,18 @@ public class Controller implements Initializable {
                 break;
             case "C++":
                 compilerPathfield.setText(CppCompiler.COMPILER_PATH);
-                compilerInterpreterargsfield.setText(CppCompiler.ARGS);
-                runcommandfield.setText(CppCompiler.RUN_COMMAND);
+                compilerInterpreterargsfield.setText(CppCompiler.ARGS); // hello.cpp -o hello
+
+
+                String[] parts = CppCompiler.ARGS.split("-o");
+                if (parts.length == 2) {
+                    String exeName = parts[1].trim();
+                    runcommandfield.setText(exeName.endsWith(".exe") ? exeName : exeName + ".exe");
+                } else {
+                    runcommandfield.setText("");
+                }
                 break;
+
             case "JAVA":
                 compilerPathfield.setText(JavaCompiler.COMPILER_PATH);
                 compilerInterpreterargsfield.setText(JavaCompiler.ARGS);
@@ -259,29 +268,31 @@ public class Controller implements Initializable {
         JavaCompiler javaCompiler = new JavaCompiler(workingDirectory);
 
         try {
-            System.out.println("Compile Path: " + compilerPathfield.getText());
-            System.out.println("Run Command: " + runcommandfield.getText());
-
-            Result compileResult = javaCompiler.compile(compilerPathfield.getText(), compilerInterpreterargsfield.getText());
-            System.out.println("Compile Output: " + compileResult.getOutput());
-            System.out.println("Compile Status: " + compileResult.getStatus());
-
-            if (compileResult.getStatus() == 0) {
-                Result runResult = javaCompiler.run(runcommandfield.getText(), "");
-                System.out.println("Run Output: " + runResult.getOutput());
-                System.out.println("Run Status: " + runResult.getStatus());
-                return runResult.getOutput(); // Çıktıyı döndür
-            } else {
-                System.err.println("Compilation failed. Output: " + compileResult.getOutput());
-                return "-2";
+            // .java dosyasını bul
+            File[] javaFiles = workingDirectory.listFiles((dir, name) -> name.toLowerCase().endsWith(".java"));
+            if (javaFiles == null || javaFiles.length == 0) {
+                return "Compile error: No .java file found in " + filePath;
             }
+
+            String javaFile = javaFiles[0].getName();              // örn: Test.java
+            String className = javaFile.replace(".java", "");      // örn: Test
+
+            // Derle
+            Result compileResult = javaCompiler.compile("javac", javaFile);
+            if (compileResult.getStatus() != 0) {
+                return "Compile error:\n" + compileResult.getError();
+            }
+
+            // Çalıştır
+            Result runResult = javaCompiler.run("java " + className, "");
+            return runResult.getOutput();
+
         } catch (Exception e) {
             e.printStackTrace();
-            return "-2";
+            return "Exception: " + e.getMessage();
         }
-
-
     }
+
 
     @FXML
     public String compileAndRunC(String filePath) {
@@ -306,16 +317,32 @@ public class Controller implements Initializable {
         CppCompiler cppCompiler = new CppCompiler(workingDirectory);
 
         try {
-            Result compileResult = cppCompiler.compile(compilerPathfield.getText(), compilerInterpreterargsfield.getText());
-
-            if (compileResult.getStatus() == 0) {
-                Result runResult = cppCompiler.run(workingDirectory + runcommandfield.getText(), "");
-                return runResult.getOutput();
+            // .cpp dosyasını otomatik bul
+            File[] cppFiles = workingDirectory.listFiles((dir, name) -> name.toLowerCase().endsWith(".cpp"));
+            if (cppFiles == null || cppFiles.length == 0) {
+                return "Compile error: No .cpp file found in " + filePath;
             }
+
+            String cppFile = cppFiles[0].getName();               // örn: hello.cpp
+            String exeName = cppFile.replace(".cpp", ".exe");     // örn: hello.exe
+
+            // Derleme
+            Result compileResult = cppCompiler.compile("g++", cppFile + " -o " + exeName);
+            if (compileResult.getStatus() != 0) {
+                System.err.println("❌ Derleme Hatası:\n" + compileResult.getError());
+                return "Compile error:\n" + compileResult.getError();
+            }
+
+            // Çalıştırma
+            File exeFile = new File(workingDirectory, exeName);
+            Result runResult = cppCompiler.run(exeFile.getAbsolutePath(), "");
+
+            return runResult.getOutput();
+
         } catch (Exception e) {
             e.printStackTrace();
+            return "Exception: " + e.getMessage();
         }
-        return "-4";
     }
 
     public void json() {
