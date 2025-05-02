@@ -352,7 +352,7 @@ public class Controller implements Initializable {
 
             System.out.println("Added to JSON: " + data.toString());
 
-            // SavesChoiceBox'ı güncelle
+
             savesChoiceBox.getItems().clear();
             savesChoiceBox.getItems().addAll(getFilenames("JSONFiles"));
 
