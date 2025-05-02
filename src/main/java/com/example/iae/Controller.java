@@ -251,25 +251,33 @@ public class Controller implements Initializable {
         }
         return "-1";
     }
-
     @FXML
     public String compileAndRunJava(String filePath) {
         File workingDirectory = new File(filePath);
         JavaCompiler javaCompiler = new JavaCompiler(workingDirectory);
 
         try {
+            System.out.println("Compile Path: " + compilerPathfield.getText());
+            System.out.println("Run Command: " + runcommandfield.getText());
+
             Result compileResult = javaCompiler.compile(compilerPathfield.getText(), compilerInterpreterargsfield.getText());
+            System.out.println("Compile Output: " + compileResult.getOutput());
+            System.out.println("Compile Status: " + compileResult.getStatus());
 
             if (compileResult.getStatus() == 0) {
                 Result runResult = javaCompiler.run(runcommandfield.getText(), "");
-                return runResult.getOutput();
+                System.out.println("Run Output: " + runResult.getOutput());
+                System.out.println("Run Status: " + runResult.getStatus());
+                return runResult.getOutput(); // Çıktıyı döndür
+            } else {
+                System.err.println("Compilation failed. Output: " + compileResult.getOutput());
+                return "-2";
             }
         } catch (Exception e) {
             e.printStackTrace();
+            return "-2";
         }
-        return "-2";
     }
-
     @FXML
     public String compileAndRunC(String filePath) {
         File workingDirectory = new File(filePath);
