@@ -251,7 +251,6 @@ public class Controller implements Initializable {
         }
         return "-1";
     }
-
     @FXML
     public String compileAndRunJava(String filePath) {
         File workingDirectory = new File(filePath);
@@ -267,7 +266,7 @@ public class Controller implements Initializable {
 
             if (compileResult.getStatus() == 0) {
                 Result runResult = javaCompiler.run(runcommandfield.getText(), "");
-                System.out.println("Run Output: " + runResult.getOutput()); 
+                System.out.println("Run Output: " + runResult.getOutput());
                 System.out.println("Run Status: " + runResult.getStatus());
                 return runResult.getOutput(); // Çıktıyı döndür
             } else {
@@ -278,11 +277,7 @@ public class Controller implements Initializable {
             e.printStackTrace();
             return "-2";
         }
-
-
     }
-
-
     @FXML
     public String compileAndRunC(String filePath) {
         File workingDirectory = new File(filePath);
