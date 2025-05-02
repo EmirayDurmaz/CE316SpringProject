@@ -1,0 +1,65 @@
+[
+    {
+        "result": "Correct",
+        "path": "Test",
+        "index": 0,
+        "runOutput": "-2",
+        "expectedOutput": "-2"
+    },
+    {
+        "result": "Correct",
+        "path": ".idea",
+        "index": 1,
+        "runOutput": "-2",
+        "expectedOutput": "-2"
+    },
+    {
+        "result": "Correct",
+        "path": "src",
+        "index": 2,
+        "runOutput": "-2",
+        "expectedOutput": "-2"
+    },
+    {
+        "result": "Correct",
+        "path": "Test",
+        "index": 3,
+        "runOutput": "-2",
+        "expectedOutput": "-2"
+    },
+    {
+        "result": "Correct",
+        "path": ".idea",
+        "index": 4,
+        "runOutput": "-2",
+        "expectedOutput": "-2"
+    },
+    {
+        "result": "Correct",
+        "path": "src",
+        "index": 5,
+        "runOutput": "-2",
+        "expectedOutput": "-2"
+    },
+    {
+        "result": "Correct",
+        "path": "Test",
+        "index": 6,
+        "runOutput": "-2",
+        "expectedOutput": "-2"
+    },
+    {
+        "result": "Correct",
+        "path": ".idea",
+        "index": 7,
+        "runOutput": "-2",
+        "expectedOutput": "-2"
+    },
+    {
+        "result": "Correct",
+        "path": "src",
+        "index": 8,
+        "runOutput": "-2",
+        "expectedOutput": "-2"
+    }
+]
