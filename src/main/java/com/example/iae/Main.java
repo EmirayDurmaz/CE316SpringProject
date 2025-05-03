@@ -22,7 +22,7 @@ public class Main extends Application {
         }
         Parent root = FXMLLoader.load(fxmlLocation);
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm()); // CSS EKLENDİ
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         stage.setTitle("Integrated Environment System");
         stage.setScene(scene);
         stage.show();
@@ -41,7 +41,7 @@ public class Main extends Application {
             createProjectStage.setTitle("Create Project");
             createProjectStage.initModality(Modality.WINDOW_MODAL);
             Scene scene = new Scene(createProject);
-            scene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm()); // CSS EKLENDİ
+            scene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm());
             createProjectStage.setScene(scene);
             createProjectStage.showAndWait();
         } catch (IOException e) {
@@ -65,7 +65,7 @@ public class Main extends Application {
             resultSceneStage.setTitle("ResultScene!");
             resultSceneStage.initModality(Modality.WINDOW_MODAL);
             Scene scene = new Scene(resultScene);
-            scene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm()); // CSS EKLENDİ
+            scene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm());
             resultSceneStage.setScene(scene);
             resultSceneStage.showAndWait();
         } catch (IOException e) {

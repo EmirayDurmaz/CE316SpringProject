@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="help" prefHeight="450.0" prefWidth="650.0"
+<AnchorPane fx:id="help" prefHeight="500.0" prefWidth="900.0"
             style="-fx-background-color: #f9f9f9;"
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
@@ -18,16 +18,18 @@
                    AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="70.0"
                    style="-fx-border-color: #cccccc; -fx-border-radius: 10; -fx-background-radius: 10;">
             <columns>
-                <TableColumn fx:id="path" text="ID" minWidth="150.0"
-                             style="-fx-font-size: 15px; -fx-font-weight: bold;" />
-                <TableColumn fx:id="output" text="OUTPUT" minWidth="150.0"
-                             style="-fx-font-size: 15px; -fx-font-weight: bold;" />
-                <TableColumn fx:id="expectedOutput" text="EXPECTED OUTPUT" minWidth="150.0"
-                             style="-fx-font-size: 15px; -fx-font-weight: bold;" />
-                <TableColumn fx:id="result" text="RESULT" minWidth="150.0"
-                             style="-fx-font-size: 15px; -fx-font-weight: bold;" />
+                <TableColumn fx:id="path" text="ID" minWidth="200.0" prefWidth="200.0" style="-fx-font-size: 15px; -fx-font-weight: bold;" />
+                <TableColumn fx:id="output" text="OUTPUT" minWidth="250.0" prefWidth="250.0" style="-fx-font-size: 15px; -fx-font-weight: bold;" />
+                <TableColumn fx:id="expectedOutput" text="EXPECTED OUTPUT" minWidth="250.0" prefWidth="250.0" style="-fx-font-size: 15px; -fx-font-weight: bold;" />
+                <TableColumn fx:id="result" text="RESULT" minWidth="200.0" prefWidth="200.0" style="-fx-font-size: 15px; -fx-font-weight: bold;" />
+
             </columns>
         </TableView>
+        <Button fx:id="backButton"
+                text="Back"
+                AnchorPane.leftAnchor="20.0" AnchorPane.bottomAnchor="15.0"
+                mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 8;"/>
 
         <!-- HELP BUTTON -->
         <Button fx:id="helpButton2"

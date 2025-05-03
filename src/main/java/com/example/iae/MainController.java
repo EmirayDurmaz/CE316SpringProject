@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,10 +22,9 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Buton stilleri artık CSS'den gelecek (inline style kaldırıldı)
-        createNewButton.getStyleClass().add("button-green"); // CSS'de tanımlı class
-        helpButton.getStyleClass().add("button"); // CSS'de tanımlı class
-        exitButton.getStyleClass().add("button-red"); // CSS'de tanımlı class
+        createNewButton.getStyleClass().add("button-green");
+        helpButton.getStyleClass().add("button");
+        exitButton.getStyleClass().add("button-red");
 
         createNewButton.setOnAction(actionEvent -> {
             try {
@@ -46,7 +44,7 @@ public class MainController implements Initializable {
         helpStage.setTitle("Help Center");
 
         TabPane tabPane = new TabPane();
-        tabPane.getStyleClass().add("help-tab-pane"); // CSS'de özelleştirilebilir
+        tabPane.getStyleClass().add("help-tab-pane");
 
         // Sekmeleri oluştur
         Tab manualTab = createHelpTab("📖 User Manual", "red", "manual.txt", "#d3f9d8");
@@ -57,7 +55,7 @@ public class MainController implements Initializable {
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
         Scene scene = new Scene(tabPane, 500, 400);
-        scene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm()); // CSS EKLENDİ
+        scene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm());
         helpStage.setScene(scene);
         helpStage.setResizable(true);
         helpStage.show();

@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -360,7 +361,17 @@ public class Controller implements Initializable {
 
     public void saveResultToJson(String path, String runOutput, String expectedOutput, String result) {
         String fileName = "results.json";
-        JSONArray jsonArray = new JSONArray(); // Her seferinde yeni bir dizi oluştur
+        JSONArray jsonArray = new JSONArray();
+        try {
+            File file = new File(fileName);
+            if (file.exists()) {
+                String content = new String(Files.readAllBytes(file.toPath()));
+                jsonArray = new JSONArray(content);  // Önceden kaydedilen sonuçları al
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("path", path);
         jsonObject.put("runOutput", runOutput);

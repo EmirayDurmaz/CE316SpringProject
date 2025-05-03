@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableCell;
+import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -34,6 +35,8 @@ public class UserOutputController implements Initializable {
 
     @FXML
     private Button helpButton2;
+    @FXML
+    private Button backButton;
 
     @FXML
     private TableColumn<UserOutputScene, String> result;
@@ -71,7 +74,10 @@ public class UserOutputController implements Initializable {
             }
         });
 
-
+        backButton.setOnAction(actionEvent -> {
+            Stage stage = (Stage) backButton.getScene().getWindow();
+            stage.close();
+        });
         resultsTable.setItems(resultsList);
 
         helpButton2.setOnAction(actionEvent -> {
