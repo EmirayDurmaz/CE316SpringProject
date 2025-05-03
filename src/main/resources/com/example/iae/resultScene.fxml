@@ -7,14 +7,21 @@
 
 <AnchorPane fx:id="help" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #838b83;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.iae.UserOutputController">
     <children>
-        <TableView fx:id="resultsTable" layoutX="185.0" layoutY="74.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <!-- Table layout for student ID, output, expected output, and result -->
+        <TableView fx:id="resultsTable" AnchorPane.topAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="60.0" prefHeight="250.0" prefWidth="520.0">
             <columns>
-                <TableColumn fx:id="path" prefWidth="150.0" text="ID" />
-                <TableColumn fx:id="output" prefWidth="200.0" text="OUTPUT" />
-                <TableColumn fx:id="expectedOutput" prefWidth="200.0" text="EXPECTED OUTPUT" />
-                <TableColumn fx:id="result" prefWidth="150.0" text="RESULT" />
+                <!-- ID Column -->
+                <TableColumn fx:id="path" text="ID" minWidth="150.0" style="-fx-font-size: 14px;" />
+                <!-- Output Column -->
+                <TableColumn fx:id="output" text="OUTPUT" minWidth="150.0" style="-fx-font-size: 14px;" />
+                <!-- Expected Output Column -->
+                <TableColumn fx:id="expectedOutput" text="EXPECTED OUTPUT" minWidth="150.0" style="-fx-font-size: 14px;" />
+                <!-- Result Column -->
+                <TableColumn fx:id="result" text="RESULT" minWidth="150.0" style="-fx-font-size: 14px;" />
             </columns>
         </TableView>
-        <Button fx:id="helpButton2" layoutX="22.0" layoutY="347.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="82.0" style="-fx-background-color: #e8e0a7;" text="Help" />
+
+        <!-- Help button layout, moved further down -->
+        <Button fx:id="helpButton2" AnchorPane.leftAnchor="20.0" AnchorPane.bottomAnchor="10.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #e8e0a7; -fx-font-size: 16px;" text="Help" />
     </children>
 </AnchorPane>
