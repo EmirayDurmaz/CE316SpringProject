@@ -1,6 +1,6 @@
 [{
     "result": "Incorrect",
     "path": "20220602027",
-    "runOutput": "Hello, World! C++\n",
-    "expectedOutput": "Hello, YSEMMM! C++\n"
+    "runOutput": "Sinem\n",
+    "expectedOutput": "Emiray\n"
 }]
