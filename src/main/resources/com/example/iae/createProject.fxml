@@ -16,17 +16,19 @@
             <children>
                 <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="49.0" text="Saves" textFill="#333333">
                     <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font size="14.0" name="System Bold" /> <!-- Font boyutunu küçülttüm -->
                     </font>
                 </Label>
-                <ChoiceBox fx:id="savesChoiceBox" onAction="#loadSelectedJson" prefHeight="25.0" prefWidth="85.0"  style="-fx-background-color: #e8e0a7;" />
-                <Button mnemonicParsing="false" onAction="#json" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 2, 2);" text="Save Configuration" />
-                <Button mnemonicParsing="false" onAction="#clearJson" style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 2, 2);" text="Delete Configuration">
+                <ChoiceBox fx:id="savesChoiceBox" onAction="#loadSelectedJson" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #e8e0a7;" />
+                <!-- Butonları küçültüp sola kaydırdım -->
+                <Button mnemonicParsing="false" onAction="#json" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 2, 2);" text="Save Configuration" prefWidth="140" /> <!-- Daha küçük buton -->
+                <Button mnemonicParsing="false" onAction="#clearJson" style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 2, 2);" text="Delete Configuration" prefWidth="140"> <!-- Daha küçük buton -->
                     <HBox.margin>
                         <Insets />
                     </HBox.margin>
                 </Button>
-                <Button fx:id="okeyButton" mnemonicParsing="false" onAction="#runButtonClicked" style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 2, 2);" text="Run" >
+                <!-- "Run" butonunu daha kısa yapıyoruz -->
+                <Button fx:id="okeyButton" mnemonicParsing="false" onAction="#runButtonClicked" style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 2, 2);" text="Run" prefWidth="100" >
                     <HBox.margin>
                         <Insets />
                     </HBox.margin>
@@ -66,35 +68,35 @@
             <children>
                 <Label layoutX="14.0" layoutY="32.0" text="Choose Student Directory" textFill="#333333">
                     <font>
-                        <Font size="16.0" /> <!-- Font boyutunu 18'den 16'ya küçülttüm -->
+                        <Font size="16.0" />
                     </font>
                 </Label>
                 <TextField fx:id="pathtextField" layoutX="250.0" layoutY="28.0" prefHeight="25.0" prefWidth="193.0" /> <!-- TextField biraz daha sağa kaydırıldı -->
 
                 <Label layoutX="14.0" layoutY="68.0" text="Compiler/Interpreter" textFill="#333333">
                     <font>
-                        <Font size="16.0" /> <!-- Font boyutunu küçülttüm -->
+                        <Font size="16.0" />
                     </font>
                 </Label>
                 <TextField fx:id="compilerPathfield" layoutX="250.0" layoutY="64.0" prefHeight="25.0" prefWidth="193.0" /> <!-- TextField biraz daha sağa kaydırıldı -->
 
                 <Label layoutX="14.0" layoutY="103.0" text="Arguments" textFill="#333333">
                     <font>
-                        <Font size="16.0" /> <!-- Font boyutunu küçülttüm -->
+                        <Font size="16.0" />
                     </font>
                 </Label>
                 <TextField fx:id="compilerInterpreterargsfield" layoutX="250.0" layoutY="99.0" prefHeight="25.0" prefWidth="193.0" /> <!-- TextField biraz daha sağa kaydırıldı -->
 
                 <Label layoutX="14.0" layoutY="136.0" text="Run Command" textFill="#333333">
                     <font>
-                        <Font size="16.0" /> <!-- Font boyutunu küçülttüm -->
+                        <Font size="16.0" />
                     </font>
                 </Label>
                 <TextField fx:id="runcommandfield" layoutX="250.0" layoutY="132.0" prefHeight="25.0" prefWidth="194.0" /> <!-- TextField biraz daha sağa kaydırıldı -->
 
                 <Label layoutX="14.0" layoutY="169.0" text="Expected Outcome Directory" textFill="#333333">
                     <font>
-                        <Font size="16.0" /> <!-- Font boyutunu küçülttüm -->
+                        <Font size="16.0" />
                     </font>
                 </Label>
                 <TextField fx:id="expectedOutcomepathfield" layoutX="250.0" layoutY="164.0" prefHeight="26.0" prefWidth="194.0" /> <!-- TextField biraz daha sağa kaydırıldı -->
