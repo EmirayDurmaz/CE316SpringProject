@@ -1,0 +1,55 @@
+/* Ana buton stili (ana ekrandaki gibi) */
+.button {
+    -fx-background-color: #2196F3; /* Mavi ton (Help butonu rengi) */
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 2, 2);
+    -fx-padding: 10 20 10 20;
+    -fx-cursor: hand;
+}
+
+/* Yeşil buton (Create Project) */
+.button-green {
+    -fx-background-color: #4CAF50;
+}
+
+/* Kırmızı buton (Exit) */
+.button-red {
+    -fx-background-color: #F44336;
+}
+
+/* Buton hover efekti */
+.button:hover {
+    -fx-background-color: #1976D2; /* Biraz daha koyu mavi */
+}
+
+.button-green:hover {
+    -fx-background-color: #388E3C; /* Biraz daha koyu yeşil */
+}
+
+.button-red:hover {
+    -fx-background-color: #D32F2F; /* Biraz daha koyu kırmızı */
+}
+
+/* Buton tıklanma efekti */
+.button:pressed {
+    -fx-background-color: #0D47A1;
+}
+
+.button-green:pressed {
+    -fx-background-color: #2E7D32;
+}
+
+.button-red:pressed {
+    -fx-background-color: #B71C1C;
+}
+.faq-question {
+    color: red;
+    font-weight: bold;
+}
+
+.faq-answer {
+    color: black;
+}

@@ -1,4 +1,5 @@
 package com.example.iae;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,7 +8,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 
@@ -22,6 +22,7 @@ public class Main extends Application {
         }
         Parent root = FXMLLoader.load(fxmlLocation);
         Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm()); // CSS EKLENDİ
         stage.setTitle("Integrated Environment System");
         stage.setScene(scene);
         stage.show();
@@ -40,6 +41,7 @@ public class Main extends Application {
             createProjectStage.setTitle("Create Project");
             createProjectStage.initModality(Modality.WINDOW_MODAL);
             Scene scene = new Scene(createProject);
+            scene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm()); // CSS EKLENDİ
             createProjectStage.setScene(scene);
             createProjectStage.showAndWait();
         } catch (IOException e) {
@@ -55,16 +57,15 @@ public class Main extends Application {
                 System.err.println("resultScene.fxml not found!");
                 System.exit(1);
             }
-
             FXMLLoader loader = new FXMLLoader(fxmlLocation);
             AnchorPane resultScene = loader.load();
             UserOutputController controller = loader.getController();
             controller.addResult(filePath, output, expectedOutput, result);
-
             Stage resultSceneStage = new Stage();
             resultSceneStage.setTitle("ResultScene!");
             resultSceneStage.initModality(Modality.WINDOW_MODAL);
             Scene scene = new Scene(resultScene);
+            scene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm()); // CSS EKLENDİ
             resultSceneStage.setScene(scene);
             resultSceneStage.showAndWait();
         } catch (IOException e) {

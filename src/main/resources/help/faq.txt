@@ -1,0 +1,57 @@
+❓ FAQ - Integrated Assignment Environment
+
+1. General Questions
+
+Q: How do I start a new project?
+A: Click "Create Project" on the main screen, fill in the required fields (e.g., student directory, compiler path), and save the configuration.
+
+Q: Can I edit a saved configuration?
+A: Yes. Load the configuration from the dropdown, modify the fields, and click "Save Configuration" again.
+
+2. Configuration Issues
+
+Q: The application says "Invalid compiler path." What should I do?
+A: Ensure the path points to the correct executable (e.g., javac.exe for Java, python.exe for Python).
+Use absolute paths (e.g., C:/Program Files/Java/jdk-21/bin/javac.exe).
+
+Q: Why can’t the application find student submissions?
+A: Verify the Student Directory path contains the files.
+Ensure files are directly in the folder (no subfolders unless your app supports recursion).
+
+3. Execution Problems
+
+Q: My code compiles but doesn’t run. What’s wrong?
+A: Check the Run Command field (e.g., java Main for Java, python script.py for Python).
+Ensure the compiler and runtime environments are installed.
+
+Q: The output is empty. How to debug?
+A: Test the Run Command manually in your terminal/CMD.
+Add print/log statements to student code to trace execution.
+
+4. Results & Grading
+
+Q: How are results compared to expected outputs?
+A: The system performs a text-based comparison.
+Ensure: expected outputs are in the specified directory.
+Files are named identically to student submissions (e.g., output1.txt for student1.py).
+
+Q: Can I export results?
+A: Currently, results are displayed in-app. For exports, copy the table manually or check for future updates.
+
+5. Troubleshooting
+
+Q: The application crashes on startup.
+A: Reinstall JavaFX/JRE.
+Check if resources/ files (e.g., FXML) are in the correct location.
+
+6. Advanced Features
+
+Q: Can I add custom grading rules?
+A: Not in this version. Future updates may support plugins or scripts.
+
+Q: How to handle multiple languages (e.g., Java + Python)?
+A: Save separate configurations for each language and switch between them.
+
+📌 Notes
+Always back up configurations before updating the app.
+For detailed guides, refer to the User Manual.

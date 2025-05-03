@@ -1,0 +1,71 @@
+1. Getting Started
+
+1.1 Launching the Application
+
+Double-click the application icon or run the JAR file.
+The main screen will appear
+1.2 Main Menu Options
+
+Create Project: Start a new assignment project.
+Help: Access this manual, FAQ, and basic guides.
+Exit: Close the application.
+2. Creating a Project
+
+2.1 Step-by-Step Setup
+
+Click "Create Project" on the main screen.
+Fill in the fields:
+Student Directory: Browse to select student submissions folder.
+Example: C:/Assignments/Student_Submissions/
+Compiler/Interpreter Path: Specify the language tool (e.g., C:/Python/python.exe).
+Arguments: Add compiler flags (e.g., -O for optimization).
+Run Command: Command to execute the code (e.g., python main.py).
+Expected Outcome Directory: Path to correct outputs for comparison.
+Click "Save Configuration" to store settings.
+2.2 Example Configuration
+
+Field	Example Value
+Student Directory	C:/Assignments/Submissions/
+Compiler Path	C:/Java/jdk-21/bin/javac.exe
+Run Command	java Main
+3. Running and Evaluating Submissions
+
+3.1 Execute Student Code
+
+Select a saved configuration from the dropdown.
+Click "Run":
+The system compiles/runs each student’s code.
+Outputs are compared to expected results.
+3.2 Understanding Results
+
+Results Table shows:
+ID: Student/File identifier.
+Output: Generated output.
+Expected Output: Correct answer.
+Result: ✅ (Match) or ❌ (Mismatch).
+
+
+4. Help Features
+
+4.1 Accessing Help
+
+Click "Help" on the main screen to open the manual.
+Switch between tabs:
+User Manual: This document.
+FAQ: Common troubleshooting.
+Basic Help: Quickstart guide.
+
+4.2 FAQ Highlights
+
+Q: How to handle missing student files?
+A: Ensure the Student Directory contains all submissions in a flat structure (no subfolders).
+
+Q: What if the compiler path is invalid?
+A: Re-check the path or install the required language tools.
+
+Error Message	Solution
+"File not found"	Verify paths in configuration.
+"Compilation failed"	Check compiler arguments.
+
+📌 Notes
+Always back up configurations using "Save Configuration".
