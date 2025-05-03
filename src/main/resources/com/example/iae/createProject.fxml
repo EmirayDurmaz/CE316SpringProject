@@ -1,66 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.iae.Controller">
-    <bottom>
-        <HBox alignment="CENTER" prefHeight="57.0" prefWidth="600.0" spacing="10.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
-            <children>
-                <Label alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="49.0" text="Saves" textFill="#333333">
-                    <font>
-                        <Font name="System Bold" size="18.0" />
-                    </font>
-                </Label>
-                <ChoiceBox fx:id="savesChoiceBox" onAction="#loadSelectedJson" prefHeight="25.0" prefWidth="85.0"  style="-fx-background-color: #e8e0a7;" />
-                <Button mnemonicParsing="false" onAction="#json" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 2, 2);" text="Save Configuration" />
-                <Button mnemonicParsing="false" onAction="#clearJson" style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 2, 2);" text="Delete Configuration">
-                    <HBox.margin>
-                        <Insets />
-                    </HBox.margin>
-                </Button>
-                <Button fx:id="okeyButton" mnemonicParsing="false" onAction="#runButtonClicked" style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 2, 2);" text="Run" >
-                    <HBox.margin>
-                        <Insets />
-                    </HBox.margin>
-                </Button>
-            </children>
-        </HBox>
-    </bottom>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #ffffff;"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.iae.Controller">
+
     <top>
-        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
+        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="900.0"
+              style="-fx-background-color: #ffffff; -fx-padding: 10 20 0 20;">
             <children>
-                <Label prefWidth="150.0" text="Select Language" textFill="#333333">
+                <!-- Left Group -->
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <Label text="Select Language" textFill="#333333" style="-fx-font-weight: bold;">
+                        <font>
+                            <Font size="16.0" />
+                        </font>
+                    </Label>
+                    <ChoiceBox fx:id="mychoiceBox" onAction="#choiceBoxChanged"
+                               prefWidth="150.0" style="-fx-background-color: #e8e0a7;"/>
+                </HBox>
+
+                <!-- Center Spacer -->
+                <Region HBox.hgrow="ALWAYS" />
+
+                <!-- Centered Title -->
+                <Label text="IAE" textFill="#333333" style="-fx-font-weight: bold;">
                     <font>
-                        <Font name="System Bold" size="18.0" />
-                    </font>
-                    <HBox.margin>
-                        <Insets left="20.0" top="40.0" />
-                    </HBox.margin>
-                </Label>
-                <ChoiceBox fx:id="mychoiceBox" onAction="#choiceBoxChanged" prefWidth="90.0" style="-fx-background-color: #e8e0a7;">
-                    <HBox.margin>
-                        <Insets left="10.0" top="40.0" />
-                    </HBox.margin>
-                </ChoiceBox>
-                <Label prefHeight="27.0" prefWidth="31.0" text="IAE" textFill="#333333">
-                    <HBox.margin>
-                        <Insets left="280.0" top="10.0" />
-                    </HBox.margin>
-                    <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font size="18.0" />
                     </font>
                 </Label>
+
+                <!-- Right Spacer (for balance) -->
+                <Region HBox.hgrow="ALWAYS" />
             </children>
         </HBox>
     </top>
+
     <center>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
@@ -107,6 +87,40 @@
                 <Button layoutX="455.0" layoutY="164.0" mnemonicParsing="false" text="..." onAction="#expectedDirectoryChooser" />
             </children>
         </AnchorPane>
-
     </center>
+
+    <bottom>
+        <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="900.0"
+              style="-fx-background-color: #ffffff; -fx-padding: 20 20 10 20;"
+              spacing="15.0">
+            <children>
+                <Label text="Saves:" textFill="#333333" style="-fx-font-weight: bold;">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                    <HBox.margin>
+                        <Insets right="10.0" />
+                    </HBox.margin>
+                </Label>
+
+                <ChoiceBox fx:id="savesChoiceBox" onAction="#loadSelectedJson"
+                           prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #e8e0a7;"/>
+
+                <Button mnemonicParsing="false" onAction="#json" text="Save Configuration"
+                        prefHeight="35.0" prefWidth="180.0"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white;
+                               -fx-background-radius: 5; -fx-font-weight: bold;"/>
+
+                <Button mnemonicParsing="false" onAction="#clearJson" text="Delete Configuration"
+                        prefHeight="35.0" prefWidth="180.0"
+                        style="-fx-background-color: #F44336; -fx-text-fill: white;
+                               -fx-background-radius: 5; -fx-font-weight: bold;"/>
+
+                <Button fx:id="okeyButton" mnemonicParsing="false" onAction="#runButtonClicked"
+                        text="Run" prefHeight="35.0" prefWidth="100.0"
+                        style="-fx-background-color: #2196F3; -fx-text-fill: white;
+                               -fx-background-radius: 5; -fx-font-weight: bold;"/>
+            </children>
+        </HBox>
+    </bottom>
 </BorderPane>
