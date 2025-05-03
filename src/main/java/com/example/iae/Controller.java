@@ -4,33 +4,23 @@ import com.example.iae.Compilers.CCompiler;
 import com.example.iae.Compilers.CppCompiler;
 import com.example.iae.Compilers.JavaCompiler;
 import com.example.iae.Compilers.PythonCompiler;
-import com.example.iae.Main;
-import com.example.iae.Result;
-import com.example.iae.UserOutputScene;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.Stage;
 import javafx.stage.Window;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -45,8 +35,6 @@ public class Controller implements Initializable {
     private ChoiceBox<String> mychoiceBox;
     @FXML
     private ChoiceBox<String> savesChoiceBox;
-    @FXML
-    private Button refreshButton;
     @FXML
     private Button helpBtn;
     @FXML
@@ -95,18 +83,6 @@ public class Controller implements Initializable {
             savesChoiceBox.getSelectionModel().selectFirst();
         }
 
-
-        refreshButton.setOnAction(actionEvent -> {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/createProject.fxml"));
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                Stage stage = (Stage) refreshButton.getScene().getWindow();
-                stage.setScene(scene);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
 
         okeyButton.setOnAction(actionEvent -> {
             try {
@@ -268,7 +244,6 @@ public class Controller implements Initializable {
         JavaCompiler javaCompiler = new JavaCompiler(workingDirectory);
 
         try {
-            // .java dosyasını bul
             File[] javaFiles = workingDirectory.listFiles((dir, name) -> name.toLowerCase().endsWith(".java"));
             if (javaFiles == null || javaFiles.length == 0) {
                 return "Compile error: No .java file found in " + filePath;
@@ -277,13 +252,11 @@ public class Controller implements Initializable {
             String javaFile = javaFiles[0].getName();              // örn: Test.java
             String className = javaFile.replace(".java", "");      // örn: Test
 
-            // Derle
             Result compileResult = javaCompiler.compile("javac", javaFile);
             if (compileResult.getStatus() != 0) {
                 return "Compile error:\n" + compileResult.getError();
             }
 
-            // Çalıştır
             Result runResult = javaCompiler.run("java " + className, "");
             return runResult.getOutput();
 
@@ -317,23 +290,20 @@ public class Controller implements Initializable {
         CppCompiler cppCompiler = new CppCompiler(workingDirectory);
 
         try {
-            // .cpp dosyasını otomatik bul
             File[] cppFiles = workingDirectory.listFiles((dir, name) -> name.toLowerCase().endsWith(".cpp"));
             if (cppFiles == null || cppFiles.length == 0) {
                 return "Compile error: No .cpp file found in " + filePath;
             }
 
-            String cppFile = cppFiles[0].getName();               // örn: hello.cpp
-            String exeName = cppFile.replace(".cpp", ".exe");     // örn: hello.exe
+            String cppFile = cppFiles[0].getName();
+            String exeName = cppFile.replace(".cpp", ".exe");
 
-            // Derleme
             Result compileResult = cppCompiler.compile("g++", cppFile + " -o " + exeName);
             if (compileResult.getStatus() != 0) {
-                System.err.println("❌ Derleme Hatası:\n" + compileResult.getError());
+                System.err.println("❌ Compilation Error\n" + compileResult.getError());
                 return "Compile error:\n" + compileResult.getError();
             }
 
-            // Çalıştırma
             File exeFile = new File(workingDirectory, exeName);
             Result runResult = cppCompiler.run(exeFile.getAbsolutePath(), "");
 
@@ -349,7 +319,6 @@ public class Controller implements Initializable {
         String folderPath = "JSONFiles";
         File directory = new File(folderPath);
 
-        // JSONFiles dizini yoksa oluştur
         if (!directory.exists()) {
             directory.mkdir();
         }

@@ -26,8 +26,7 @@
                         <Insets />
                     </HBox.margin>
                 </Button>
-                <Button fx:id="okeyButton" mnemonicParsing="false" onAction="#runButtonClicked" style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 2, 2);" text="Run" />
-                <Button fx:id="refreshButton" mnemonicParsing="false" style="-fx-background-color: #FFC107; -fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 2, 2);" text="Refresh">
+                <Button fx:id="okeyButton" mnemonicParsing="false" onAction="#runButtonClicked" style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 2, 2);" text="Run" >
                     <HBox.margin>
                         <Insets />
                     </HBox.margin>
