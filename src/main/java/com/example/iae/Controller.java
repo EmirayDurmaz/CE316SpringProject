@@ -440,4 +440,25 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
     }
+    private static final String FILE_NAME = "results.json";
+
+    static {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            deleteResultsFile();
+        }));
+    }
+
+    public static void deleteResultsFile() {
+        try {
+            File file = new File(FILE_NAME);
+            if (file.exists()) {
+                boolean deleted = file.delete();
+                if (deleted) {
+                    System.out.println("results.json successfully deleted!");
+                }
+            }
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+    }
 }
