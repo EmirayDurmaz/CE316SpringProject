@@ -152,7 +152,7 @@ public class Controller implements Initializable {
                 break;
             case "C++":
                 compilerPathfield.setText(CppCompiler.COMPILER_PATH);
-                compilerInterpreterargsfield.setText(CppCompiler.ARGS); // hello.cpp -o hello
+                compilerInterpreterargsfield.setText(CppCompiler.ARGS);
 
 
                 String[] parts = CppCompiler.ARGS.split("-o");
@@ -250,8 +250,8 @@ public class Controller implements Initializable {
                 return "Compile error: No .java file found in " + filePath;
             }
 
-            String javaFile = javaFiles[0].getName();              // örn: Test.java
-            String className = javaFile.replace(".java", "");      // örn: Test
+            String javaFile = javaFiles[0].getName();
+            String className = javaFile.replace(".java", "");
 
             Result compileResult = javaCompiler.compile("javac", javaFile);
             if (compileResult.getStatus() != 0) {
@@ -366,7 +366,7 @@ public class Controller implements Initializable {
             File file = new File(fileName);
             if (file.exists()) {
                 String content = new String(Files.readAllBytes(file.toPath()));
-                jsonArray = new JSONArray(content);  // Önceden kaydedilen sonuçları al
+                jsonArray = new JSONArray(content);
             }
         } catch (IOException e) {
             e.printStackTrace();

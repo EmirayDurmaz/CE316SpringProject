@@ -46,7 +46,7 @@ public class MainController implements Initializable {
         TabPane tabPane = new TabPane();
         tabPane.getStyleClass().add("help-tab-pane");
 
-        // Sekmeleri oluştur
+
         Tab manualTab = createHelpTab("📖 User Manual", "red", "manual.txt", "#d3f9d8");
         Tab faqTab = createHelpTab("❓ FAQ", "blue", "faq.txt", "#f9d8d8");
         Tab basicTab = createHelpTab("ℹ️ Basic Help", "green", "basic.txt", "#d8e4f9");

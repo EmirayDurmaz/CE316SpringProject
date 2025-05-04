@@ -14,10 +14,10 @@
         <HBox alignment="CENTER" prefHeight="80.0" prefWidth="900.0"
               style="-fx-background-color: #ffffff; -fx-padding: 10 20 0 20;">
             <children>
-                <!-- Left Spacer -->
+
                 <Region HBox.hgrow="ALWAYS" />
 
-                <!-- Centered Language Selection -->
+
                 <HBox alignment="CENTER" spacing="10.0">
                     <Label text="Select Language" textFill="#333333" style="-fx-font-weight: bold;">
                         <font>
@@ -28,17 +28,16 @@
                                prefWidth="150.0" style="-fx-background-color: #e8e0a7;"/>
                 </HBox>
 
-                <!-- Center Spacer (pushes both language and title to center) -->
+
                 <Region HBox.hgrow="ALWAYS" />
 
-                <!-- Centered Title -->
+
                 <Label text="IAE" textFill="#333333" style="-fx-font-weight: bold;">
                     <font>
                         <Font size="18.0" />
                     </font>
                 </Label>
 
-                <!-- Right Spacer (for balance) -->
                 <Region HBox.hgrow="ALWAYS" />
             </children>
         </HBox>
@@ -50,7 +49,6 @@
                 <Insets left="150.0" right="50.0"/>
             </padding>
             <children>
-                <!-- Student Directory -->
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <Label text="Choose Student Directory" textFill="#333333" prefWidth="220">
                         <font>
@@ -61,7 +59,6 @@
                     <Button mnemonicParsing="false" text="..." onAction="#pathDirectoryChooser" />
                 </HBox>
 
-                <!-- Compiler -->
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <Label text="Compiler/Interpreter" textFill="#333333" prefWidth="220">
                         <font>
@@ -71,7 +68,6 @@
                     <TextField fx:id="compilerPathfield" prefHeight="25.0" prefWidth="193.0" />
                 </HBox>
 
-                <!-- Arguments -->
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <Label text="Arguments" textFill="#333333" prefWidth="220">
                         <font>
@@ -81,7 +77,6 @@
                     <TextField fx:id="compilerInterpreterargsfield" prefHeight="25.0" prefWidth="193.0" />
                 </HBox>
 
-                <!-- Run Command -->
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <Label text="Run Command" textFill="#333333" prefWidth="220">
                         <font>
@@ -91,7 +86,6 @@
                     <TextField fx:id="runcommandfield" prefHeight="25.0" prefWidth="193.0" />
                 </HBox>
 
-                <!-- Expected Output Directory -->
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <Label text="Expected Outcome Directory" textFill="#333333" prefWidth="220">
                         <font>

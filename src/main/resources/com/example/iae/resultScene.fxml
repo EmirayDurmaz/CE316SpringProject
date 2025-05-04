@@ -12,7 +12,6 @@
             fx:controller="com.example.iae.UserOutputController">
 
     <children>
-        <!-- TABLE -->
         <TableView fx:id="resultsTable"
                    AnchorPane.topAnchor="20.0" AnchorPane.leftAnchor="20.0"
                    AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="70.0"
@@ -31,7 +30,7 @@
                 mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0"
                 style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 8;"/>
 
-        <!-- HELP BUTTON -->
+
         <Button fx:id="helpButton2"
                 AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="15.0"
                 mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0"
