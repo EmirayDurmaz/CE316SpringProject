@@ -1,28 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: #F0F0F0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.iae.MainController">
-    <top>
-        <Label prefHeight="39.0" prefWidth="469.0" text="Integrated Assignment Environment" textAlignment="CENTER" textFill="#333333" BorderPane.alignment="CENTER">
-            <font>
-                <Font name="Verdana" size="24.0" />
-            </font>
-            <BorderPane.margin>
-                <Insets top="40.0" />
-            </BorderPane.margin>
-        </Label>
-    </top>
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.iae.MainController"
+            prefWidth="900.0" prefHeight="500.0"
+            style="-fx-background-color: linear-gradient(to right, #e8eaf6, #ffffff);">
+
+    <left>
+        <VBox alignment="CENTER" spacing="20" prefWidth="300" style="-fx-background-color: #ffffff;">
+            <padding>
+                <Insets top="50" left="30" right="30" bottom="30" />
+            </padding>
+
+            <Label text="IAE Menu" style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;">
+                <font>
+                    <Font name="Verdana" size="24" />
+                </font>
+            </Label>
+
+            <Button fx:id="createNewButton" text="Create Project" prefWidth="220" prefHeight="60"
+                    style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 2, 2);" />
+
+            <Button fx:id="helpButton" text="Help" prefWidth="220" prefHeight="60"
+                    style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 2, 2);" />
+
+            <Button fx:id="exitButton" text="Exit" prefWidth="220" prefHeight="60"
+                    style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 2, 2);" />
+        </VBox>
+    </left>
+
     <center>
-        <VBox alignment="CENTER" spacing="20" BorderPane.alignment="CENTER">
-            <Button fx:id="createNewButton" mnemonicParsing="false" prefWidth="200.0" prefHeight="50.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 2, 2);" text="Create Project" />
-            <Button fx:id="helpButton" mnemonicParsing="false" prefWidth="200.0" prefHeight="50.0" style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 2, 2);" text="Help" />
-            <Button fx:id="exitButton" mnemonicParsing="false" prefWidth="200.0" prefHeight="50.0" style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 2, 2);" text="Exit" />
+        <VBox alignment="CENTER" spacing="10">
+            <Label text="Integrated Assignment Environment"
+                   style="-fx-text-fill: #37474F; -fx-font-weight: bold;">
+                <font>
+                    <Font name="System" size="28.0" />
+                </font>
+            </Label>
+            <Label text="Build. Compile. Evaluate." style="-fx-text-fill: #666; -fx-font-size: 16;" />
         </VBox>
     </center>
 </BorderPane>

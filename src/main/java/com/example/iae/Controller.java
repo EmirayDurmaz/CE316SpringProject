@@ -73,17 +73,31 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        File folder = new File("JSONFiles");
+        if (folder.exists() && folder.isDirectory()) {
+            File[] filesInFolder = folder.listFiles();
+            if (filesInFolder != null) {
+                for (File file : filesInFolder) {
+                    if (file.isFile() && file.getName().endsWith(".json")) {
+                        boolean deleted = file.delete();
+                        if (!deleted) {
+                            System.out.println("Could not delete file: " + file.getName());
+                        }
+                    }
+                }
+            }
+        }
+
         mychoiceBox.getItems().addAll(languages);
         mychoiceBox.getSelectionModel().selectFirst();
 
-
-        files = getFilenames("JSONFiles");
         savesChoiceBox.getItems().clear();
-        savesChoiceBox.getItems().addAll(files);
-        if (files.length > 0) {
-            savesChoiceBox.getSelectionModel().selectFirst();
-        }
 
+        pathtextField.clear();
+        compilerPathfield.clear();
+        compilerInterpreterargsfield.clear();
+        runcommandfield.clear();
+        expectedOutcomepathfield.clear();
 
         okeyButton.setOnAction(actionEvent -> {
             try {
@@ -143,7 +157,13 @@ public class Controller implements Initializable {
     @FXML
     public void choiceBoxChanged(ActionEvent event) {
         String selectedLanguage = mychoiceBox.getSelectionModel().getSelectedItem();
+        if (selectedLanguage == null || selectedLanguage.equals("İstediğiniz programlama dilini girin")) {
+            // Placeholder seçili ise işlem yapma
+            System.out.println("Lütfen bir programlama dili seçin.");
+            return;
+        }
 
+        // Asıl işlem
         switch (selectedLanguage) {
             case "C":
                 compilerPathfield.setText(CCompiler.COMPILER_PATH);
@@ -153,8 +173,6 @@ public class Controller implements Initializable {
             case "C++":
                 compilerPathfield.setText(CppCompiler.COMPILER_PATH);
                 compilerInterpreterargsfield.setText(CppCompiler.ARGS);
-
-
                 String[] parts = CppCompiler.ARGS.split("-o");
                 if (parts.length == 2) {
                     String exeName = parts[1].trim();
@@ -163,7 +181,6 @@ public class Controller implements Initializable {
                     runcommandfield.setText("");
                 }
                 break;
-
             case "JAVA":
                 compilerPathfield.setText(JavaCompiler.COMPILER_PATH);
                 compilerInterpreterargsfield.setText(JavaCompiler.ARGS);
@@ -173,8 +190,6 @@ public class Controller implements Initializable {
                 compilerPathfield.setText(PythonCompiler.COMPILER_PATH);
                 compilerInterpreterargsfield.setText(PythonCompiler.ARGS);
                 runcommandfield.setText("");
-                break;
-            default:
                 break;
         }
     }
@@ -417,29 +432,53 @@ public class Controller implements Initializable {
     @FXML
     public void clearJson() {
         String selectedJsonFileName = savesChoiceBox.getSelectionModel().getSelectedItem();
-        String selectedJsonFilePath = "JSONFiles" + File.separator + selectedJsonFileName;
 
-        try {
-            File file = new File(selectedJsonFilePath);
-            if (file.delete()) {
-                System.out.println("Selected JSON file has been deleted successfully.");
-            } else {
-                System.out.println("Failed to delete the selected JSON file.");
-            }
-
-            mychoiceBox.getSelectionModel().clearSelection();
-            pathtextField.clear();
-            compilerPathfield.clear();
-            compilerInterpreterargsfield.clear();
-            runcommandfield.clear();
-            expectedOutcomepathfield.clear();
-
-            savesChoiceBox.getItems().remove(selectedJsonFileName);
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (selectedJsonFileName == null || selectedJsonFileName.isEmpty()) {
+            showHelp("Please select a configuration file to delete.", "No File Selected");
+            return;
         }
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Are you sure you want to delete the selected configuration?",
+                ButtonType.YES, ButtonType.NO);
+        alert.setTitle("Confirm Deletion");
+        alert.setHeaderText("Delete Configuration");
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.YES) {
+                String selectedJsonFilePath = "JSONFiles" + File.separator + selectedJsonFileName;
+                File file = new File(selectedJsonFilePath);
+
+                if (file.exists()) {
+                    boolean deleted = file.delete();
+                    if (deleted) {
+                        System.out.println("Selected JSON file has been deleted successfully.");
+
+                        savesChoiceBox.getItems().remove(selectedJsonFileName);
+                        if (!savesChoiceBox.getItems().isEmpty()) {
+                            savesChoiceBox.getSelectionModel().selectFirst();
+                            // Otomatik loadSelectedJson tetiklenmişse sıkıntı yok
+                        } else {
+                            // Sadece savesChoiceBox boşsa temizle
+                            pathtextField.clear();
+                            compilerPathfield.clear();
+                            compilerInterpreterargsfield.clear();
+                            runcommandfield.clear();
+                            expectedOutcomepathfield.clear();
+                            mychoiceBox.getSelectionModel().selectFirst(); // null crash olmasın
+                        }
+
+                    } else {
+                        showHelp("Failed to delete the selected JSON file.", "Delete Error");
+                    }
+                } else {
+                    showHelp("The selected file does not exist.", "File Not Found");
+                }
+            }
+        });
     }
+
+
     private static final String FILE_NAME = "results.json";
 
     static {
