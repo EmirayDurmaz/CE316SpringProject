@@ -8,6 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableCell;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -54,6 +56,7 @@ public class UserOutputController implements Initializable {
         expectedOutput.setCellValueFactory(new PropertyValueFactory<>("expectedOutput"));
         result.setCellValueFactory(new PropertyValueFactory<>("result"));
 
+        exportButton.setOnAction(this::exportResults);
 
         result.setCellFactory(column -> new TableCell<>() {
             @Override
@@ -193,6 +196,68 @@ public class UserOutputController implements Initializable {
         });
     }
 
+    @FXML
+    private Button exportButton;
+
+    @FXML
+    public void exportResults(ActionEvent event) {
+        FileChooser directoryChooser = new FileChooser();
+
+        // Sadece dizin seçmek için DirectoryChooser kullanacağız, ancak JavaFX 8'de DirectoryChooser var
+        // Ancak JavaFX'de FileChooser klasör seçmek için değil, dosya seçmek için kullanılır.
+        // Bu yüzden DirectoryChooser kullanmalıyız.
+
+        // Eğer DirectoryChooser yoksa, aşağıdaki kodu DirectoryChooser ile değiştir:
+        // DirectoryChooser directoryChooser = new DirectoryChooser();
+
+        DirectoryChooser directoryChooser2 = new DirectoryChooser();
+        directoryChooser2.setTitle("Select Folder to Export Results");
+
+        // Varsayılan olarak Masaüstü göster (Windows için)
+        File defaultDirectory = new File(System.getProperty("user.home") + File.separator + "Desktop");
+        directoryChooser2.setInitialDirectory(defaultDirectory);
+
+        File selectedDirectory = directoryChooser2.showDialog(exportButton.getScene().getWindow());
+
+        if (selectedDirectory != null) {
+            // ExportedResults klasörünü oluştur
+            File exportFolder = new File(selectedDirectory, "ExportedResults");
+            if (!exportFolder.exists()) {
+                boolean created = exportFolder.mkdir();
+                if (!created) {
+                    showAlert("Error", "Failed to create export folder.");
+                    return;
+                }
+            }
+
+            File sourceFile = new File("results.json");
+            if (!sourceFile.exists()) {
+                showAlert("Error", "results.json file does not exist.");
+                return;
+            }
+
+            File destFile = new File(exportFolder, "results.json");
+
+            try {
+                Files.copy(sourceFile.toPath(), destFile.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                showAlert("Success", "Results exported to:\n" + destFile.getAbsolutePath());
+            } catch (IOException e) {
+                e.printStackTrace();
+                showAlert("Error", "Failed to export results.");
+            }
+        } else {
+            // Kullanıcı klasör seçimini iptal etti
+            System.out.println("Export cancelled by user.");
+        }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
 
 }

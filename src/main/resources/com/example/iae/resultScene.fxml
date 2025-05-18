@@ -24,13 +24,22 @@
 
             </columns>
         </TableView>
-        <Button fx:id="backButton"
-                text="Back"
+
+        <Button fx:id="exportButton" text="Export Results" onAction="#exportResults"
                 AnchorPane.leftAnchor="20.0" AnchorPane.bottomAnchor="15.0"
+                mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0"
+                style="-fx-background-color: #607D8B; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 8;"/>
+
+        <Button fx:id="deleteStudentButton" text="Delete Student Result" onAction="#deleteStudentResult"
+                AnchorPane.leftAnchor="150.0" AnchorPane.bottomAnchor="15.0"
+                mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0"
+                style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 8;"/>
+
+        <Button fx:id="backButton" text="Back"
+                AnchorPane.leftAnchor="320.0" AnchorPane.bottomAnchor="15.0"
                 mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0"
                 style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 8;"/>
 
-        <Button fx:id="deleteStudentButton" text="Delete Student Result" onAction="#deleteStudentResult"/>
 
         <Button fx:id="helpButton2"
                 AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="15.0"
