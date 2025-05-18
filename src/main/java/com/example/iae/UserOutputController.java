@@ -203,24 +203,16 @@ public class UserOutputController implements Initializable {
     public void exportResults(ActionEvent event) {
         FileChooser directoryChooser = new FileChooser();
 
-        // Sadece dizin seçmek için DirectoryChooser kullanacağız, ancak JavaFX 8'de DirectoryChooser var
-        // Ancak JavaFX'de FileChooser klasör seçmek için değil, dosya seçmek için kullanılır.
-        // Bu yüzden DirectoryChooser kullanmalıyız.
-
-        // Eğer DirectoryChooser yoksa, aşağıdaki kodu DirectoryChooser ile değiştir:
-        // DirectoryChooser directoryChooser = new DirectoryChooser();
 
         DirectoryChooser directoryChooser2 = new DirectoryChooser();
         directoryChooser2.setTitle("Select Folder to Export Results");
 
-        // Varsayılan olarak Masaüstü göster (Windows için)
         File defaultDirectory = new File(System.getProperty("user.home") + File.separator + "Desktop");
         directoryChooser2.setInitialDirectory(defaultDirectory);
 
         File selectedDirectory = directoryChooser2.showDialog(exportButton.getScene().getWindow());
 
         if (selectedDirectory != null) {
-            // ExportedResults klasörünü oluştur
             File exportFolder = new File(selectedDirectory, "ExportedResults");
             if (!exportFolder.exists()) {
                 boolean created = exportFolder.mkdir();
@@ -246,7 +238,7 @@ public class UserOutputController implements Initializable {
                 showAlert("Error", "Failed to export results.");
             }
         } else {
-            // Kullanıcı klasör seçimini iptal etti
+
             System.out.println("Export cancelled by user.");
         }
     }

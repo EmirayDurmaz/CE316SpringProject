@@ -14,7 +14,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -75,30 +74,41 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         File folder = new File("JSONFiles");
-        if (folder.exists() && folder.isDirectory()) {
-            File[] filesInFolder = folder.listFiles();
-            if (filesInFolder != null) {
-                for (File file : filesInFolder) {
-                    if (file.isFile() && file.getName().endsWith(".json")) {
-                        boolean deleted = file.delete();
-                        if (!deleted) {
-                            System.out.println("Could not delete file: " + file.getName());
-                        }
-                    }
-                }
-            }
+        if (!folder.exists()) {
+            folder.mkdir();
         }
 
+        savesChoiceBox.getItems().clear();
+        savesChoiceBox.getItems().addAll(getFilenames("JSONFiles"));
+
+        mychoiceBox.getItems().clear();
         mychoiceBox.getItems().addAll(languages);
         mychoiceBox.getSelectionModel().selectFirst();
-
-        savesChoiceBox.getItems().clear();
 
         pathtextField.clear();
         compilerPathfield.clear();
         compilerInterpreterargsfield.clear();
         runcommandfield.clear();
         expectedOutcomepathfield.clear();
+
+        if (!savesChoiceBox.getItems().isEmpty()) {
+            savesChoiceBox.getSelectionModel().selectFirst();
+            try {
+                loadSelectedJson();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        savesChoiceBox.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal != null) {
+                try {
+                    loadSelectedJson();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         okeyButton.setOnAction(actionEvent -> {
             try {
@@ -277,7 +287,6 @@ public class Controller implements Initializable {
         }
     }
 
-
     @FXML
     public String compileAndRunC(String filePath) {
         File workingDirectory = new File(filePath);
@@ -397,31 +406,28 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    public void loadSelectedJson(ActionEvent event) {
+    public void loadSelectedJson() throws IOException {
         String selectedJsonFileName = savesChoiceBox.getSelectionModel().getSelectedItem();
+        if (selectedJsonFileName == null) return;
+
         String selectedJsonFilePath = "JSONFiles" + File.separator + selectedJsonFileName;
 
         ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            JsonNode rootNode = objectMapper.readTree(new File(selectedJsonFilePath));
+        JsonNode rootNode = objectMapper.readTree(new File(selectedJsonFilePath));
 
-            String language = rootNode.path("Requirements").path(0).path("Language").asText();
-            String chooseFile = rootNode.path("Requirements").path(0).path("chooseFile").asText();
-            String compilerPath = rootNode.path("Requirements").path(0).path("compilerPath").asText();
-            String interpreterArgs = rootNode.path("Requirements").path(0).path("compiler").asText();
-            String runCommand = rootNode.path("Requirements").path(0).path("runCommand").asText();
-            String expected = rootNode.path("Requirements").path(0).path("expected").asText();
+        String language = rootNode.path("Requirements").path(0).path("Language").asText();
+        String chooseFile = rootNode.path("Requirements").path(0).path("chooseFile").asText();
+        String compilerPath = rootNode.path("Requirements").path(0).path("compilerPath").asText();
+        String interpreterArgs = rootNode.path("Requirements").path(0).path("compiler").asText();
+        String runCommand = rootNode.path("Requirements").path(0).path("runCommand").asText();
+        String expected = rootNode.path("Requirements").path(0).path("expected").asText();
 
-            mychoiceBox.getSelectionModel().select(language);
-            pathtextField.setText(chooseFile);
-            compilerPathfield.setText(compilerPath);
-            compilerInterpreterargsfield.setText(interpreterArgs);
-            runcommandfield.setText(runCommand);
-            expectedOutcomepathfield.setText(expected);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        mychoiceBox.getSelectionModel().select(language);
+        pathtextField.setText(chooseFile);
+        compilerPathfield.setText(compilerPath);
+        compilerInterpreterargsfield.setText(interpreterArgs);
+        runcommandfield.setText(runCommand);
+        expectedOutcomepathfield.setText(expected);
     }
 
     @FXML
@@ -469,30 +475,6 @@ public class Controller implements Initializable {
                 }
             }
         });
-    }
-
-
-    private static final String FILE_NAME = "results.json";
-
-    static {
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            deleteResultsFile();
-        }));
-    }
-
-
-    public static void deleteResultsFile() {
-        try {
-            File file = new File(FILE_NAME);
-            if (file.exists()) {
-                boolean deleted = file.delete();
-                if (deleted) {
-                    System.out.println("results.json successfully deleted!");
-                }
-            }
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        }
     }
 
 }
