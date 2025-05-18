@@ -157,13 +157,7 @@ public class Controller implements Initializable {
     @FXML
     public void choiceBoxChanged(ActionEvent event) {
         String selectedLanguage = mychoiceBox.getSelectionModel().getSelectedItem();
-        if (selectedLanguage == null || selectedLanguage.equals("İstediğiniz programlama dilini girin")) {
-            // Placeholder seçili ise işlem yapma
-            System.out.println("Lütfen bir programlama dili seçin.");
-            return;
-        }
 
-        // Asıl işlem
         switch (selectedLanguage) {
             case "C":
                 compilerPathfield.setText(CCompiler.COMPILER_PATH);
@@ -457,15 +451,13 @@ public class Controller implements Initializable {
                         savesChoiceBox.getItems().remove(selectedJsonFileName);
                         if (!savesChoiceBox.getItems().isEmpty()) {
                             savesChoiceBox.getSelectionModel().selectFirst();
-                            // Otomatik loadSelectedJson tetiklenmişse sıkıntı yok
                         } else {
-                            // Sadece savesChoiceBox boşsa temizle
                             pathtextField.clear();
                             compilerPathfield.clear();
                             compilerInterpreterargsfield.clear();
                             runcommandfield.clear();
                             expectedOutcomepathfield.clear();
-                            mychoiceBox.getSelectionModel().selectFirst(); // null crash olmasın
+                            mychoiceBox.getSelectionModel().selectFirst();
                         }
 
                     } else {
@@ -486,6 +478,7 @@ public class Controller implements Initializable {
             deleteResultsFile();
         }));
     }
+
 
     public static void deleteResultsFile() {
         try {

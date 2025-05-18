@@ -30,6 +30,7 @@
                 mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0"
                 style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 8;"/>
 
+        <Button fx:id="deleteStudentButton" text="Delete Student Result" onAction="#deleteStudentResult"/>
 
         <Button fx:id="helpButton2"
                 AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="15.0"

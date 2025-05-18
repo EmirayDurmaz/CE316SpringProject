@@ -2,6 +2,7 @@ package com.example.iae;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -11,6 +12,8 @@ import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -132,4 +135,64 @@ public class UserOutputController implements Initializable {
             e.printStackTrace();
         }
     }
+    @FXML
+    private Button deleteStudentButton;
+
+    @FXML
+    public void deleteStudentResult(ActionEvent event) {
+        UserOutputScene selected = resultsTable.getSelectionModel().getSelectedItem();
+
+        if (selected == null) {
+            help("Please select a student result to delete.", "No Selection");
+            return;
+        }
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Are you sure you want to delete the selected result?",
+                ButtonType.YES, ButtonType.NO);
+
+        alert.setTitle("Confirm Deletion");
+        alert.setHeaderText(null);
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.YES) {
+                String studentPathToDelete = selected.getPath();
+
+                JSONArray jsonArray = new JSONArray();
+                try {
+                    File file = new File("results.json");
+                    if (file.exists()) {
+                        String content = new String(Files.readAllBytes(file.toPath()));
+                        jsonArray = new JSONArray(content);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                JSONArray newArray = new JSONArray();
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject obj = jsonArray.getJSONObject(i);
+                    String path = obj.optString("path", "");
+                    if (!path.equals(studentPathToDelete)) {
+                        newArray.put(obj);
+                    }
+                }
+
+                try (FileWriter fileWriter = new FileWriter("results.json")) {
+                    fileWriter.write(newArray.toString(4));
+                    fileWriter.flush();
+                    System.out.println("Student result deleted successfully.");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                resultsList.remove(selected);
+            } else {
+                System.out.println("Deletion cancelled by user.");
+            }
+        });
+    }
+
+
+
 }
