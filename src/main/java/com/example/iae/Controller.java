@@ -476,5 +476,45 @@ public class Controller implements Initializable {
             }
         });
     }
+    @FXML
+    public void exportConfig(ActionEvent event) {
+        String selectedJsonFileName = savesChoiceBox.getSelectionModel().getSelectedItem();
+        if (selectedJsonFileName == null) {
+            showHelp("Please select a configuration file to export.", "No File Selected");
+            return;
+        }
+
+        String selectedJsonFilePath = "JSONFiles" + File.separator + selectedJsonFileName;
+        File sourceFile = new File(selectedJsonFilePath);
+        if (!sourceFile.exists()) {
+            showHelp("Selected configuration file does not exist.", "File Not Found");
+            return;
+        }
+
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Select Folder to Export Configuration");
+        File defaultDir = new File(System.getProperty("user.home") + File.separator + "Desktop");
+        if (defaultDir.exists()) {
+            directoryChooser.setInitialDirectory(defaultDir);
+        }
+
+        Window window = okeyButton.getScene().getWindow();  // herhangi bir UI elemanından window alınabilir
+        File exportDir = directoryChooser.showDialog(window);
+
+        if (exportDir != null) {
+            File destFile = new File(exportDir, selectedJsonFileName);
+
+            try {
+                Files.copy(sourceFile.toPath(), destFile.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                showHelp("Configuration exported to:\n" + destFile.getAbsolutePath(), "Export Successful");
+            } catch (IOException e) {
+                e.printStackTrace();
+                showHelp("Failed to export configuration.", "Export Error");
+            }
+        } else {
+            System.out.println("Export cancelled by user.");
+        }
+    }
+
 
 }
