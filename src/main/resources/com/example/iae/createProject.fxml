@@ -62,24 +62,24 @@
                         <ColumnConstraints minWidth="40" />
                     </columnConstraints>
 
-                    <!-- Satır 0 -->
+
                     <Label text="Choose Student Directory" textFill="#333333" style="-fx-font-weight: bold; -fx-font-size: 18px;" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                     <TextField fx:id="pathtextField" prefHeight="25.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                     <Button mnemonicParsing="false" text="..." onAction="#pathDirectoryChooser" GridPane.columnIndex="2" GridPane.rowIndex="0" />
 
-                    <!-- Satır 1 -->
+
                     <Label text="Compiler/Interpreter" textFill="#333333" style="-fx-font-weight: bold; -fx-font-size: 18px;" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                     <TextField fx:id="compilerPathfield" prefHeight="25.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                    <!-- Satır 2 -->
+
                     <Label text="Arguments" textFill="#333333" style="-fx-font-weight: bold; -fx-font-size: 18px;" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                     <TextField fx:id="compilerInterpreterargsfield" prefHeight="25.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-                    <!-- Satır 3 -->
+
                     <Label text="Run Command" textFill="#333333" style="-fx-font-weight: bold; -fx-font-size: 18px;" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                     <TextField fx:id="runcommandfield" prefHeight="25.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-                    <!-- Satır 4 -->
+
                     <Label text="Expected Outcome Directory" textFill="#333333" style="-fx-font-weight: bold; -fx-font-size: 18px;" GridPane.columnIndex="0" GridPane.rowIndex="4" />
                     <TextField fx:id="expectedOutcomepathfield" prefHeight="26.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                     <Button mnemonicParsing="false" text="..." onAction="#expectedDirectoryChooser" GridPane.columnIndex="2" GridPane.rowIndex="4" />
