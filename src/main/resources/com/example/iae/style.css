@@ -32,6 +32,14 @@
 .button-red:hover {
     -fx-background-color: #D32F2F;
 }
+.choice-box {
+    -fx-font-size: 15px;
+}
+
+.choice-box .list-cell {
+    -fx-font-size: 15px;
+}
+
 
 
 .button:pressed {

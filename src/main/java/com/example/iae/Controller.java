@@ -498,7 +498,7 @@ public class Controller implements Initializable {
             directoryChooser.setInitialDirectory(defaultDir);
         }
 
-        Window window = okeyButton.getScene().getWindow();  // herhangi bir UI elemanından window alınabilir
+        Window window = okeyButton.getScene().getWindow();
         File exportDir = directoryChooser.showDialog(window);
 
         if (exportDir != null) {

@@ -8,7 +8,7 @@
 <BorderPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.iae.MainController"
-            prefWidth="900.0" prefHeight="500.0"
+            prefWidth="1020.0" prefHeight="600.0"
             style="-fx-background-color: linear-gradient(to right, #e8eaf6, #ffffff);">
 
     <left>
