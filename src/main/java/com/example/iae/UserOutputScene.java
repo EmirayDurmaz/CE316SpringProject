@@ -21,8 +21,6 @@ public class UserOutputScene {
         this.runCommand = runCommand;
     }
 
-
-
     public String getExpectedOutput() {
         return expectedOutput;
     }

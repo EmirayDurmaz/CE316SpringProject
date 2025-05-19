@@ -120,11 +120,12 @@ public class Controller implements Initializable {
                             result.getRunOutput(),
                             result.getExpectedOutput(),
                             result.getResult(),
-                            mychoiceBox.getSelectionModel().getSelectedItem(),  // language
+                            mychoiceBox.getSelectionModel().getSelectedItem(),
                             compilerPathfield.getText(),                         // compilerPath
                             compilerInterpreterargsfield.getText(),             // compilerArgs
                             runcommandfield.getText()                            // runCommand
                     );
+
 
 
 
