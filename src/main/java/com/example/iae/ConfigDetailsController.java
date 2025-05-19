@@ -107,6 +107,8 @@ public class ConfigDetailsController {
         }
     }
 
+
+
     @FXML
     public void handleClose() {
         Stage stage = (Stage) languageLabel.getScene().getWindow();
