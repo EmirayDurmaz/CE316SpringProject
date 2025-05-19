@@ -10,14 +10,10 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.Stage;
 import javafx.stage.Window;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -26,7 +22,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -125,14 +120,11 @@ public class Controller implements Initializable {
                             result.getRunOutput(),
                             result.getExpectedOutput(),
                             result.getResult(),
-                            mychoiceBox.getSelectionModel().getSelectedItem(),
+                            mychoiceBox.getSelectionModel().getSelectedItem(),  // language
                             compilerPathfield.getText(),                         // compilerPath
                             compilerInterpreterargsfield.getText(),             // compilerArgs
                             runcommandfield.getText()                            // runCommand
                     );
-
-
-
 
                     Main.showResultScene(path,
                             result.getRunOutput(),
@@ -471,46 +463,7 @@ public class Controller implements Initializable {
         compilerInterpreterargsfield.setText(interpreterArgs);
         runcommandfield.setText(runCommand);
         expectedOutcomepathfield.setText(expected);
-
-        // Sonuçları oku
-        List<UserOutputScene> filteredResults = new ArrayList<>();
-
-        String resultsContent = new String(Files.readAllBytes(Paths.get("results.json")));
-        JSONArray jsonArray = new JSONArray(resultsContent);
-
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject obj = jsonArray.getJSONObject(i);
-
-            // Burada filtreleme yapabilirsin, örn. path veya language bazında
-            if (obj.optString("language", "").equals(language)) { // Basit dil bazlı filtre
-
-                filteredResults.add(new UserOutputScene(
-                        obj.optString("path", ""),
-                        obj.optString("runOutput", ""),
-                        obj.optString("expectedOutput", ""),
-                        obj.optString("result", ""),
-                        obj.optString("language", ""),
-                        obj.optString("compilerPath", ""),
-                        obj.optString("compilerArgs", ""),
-                        obj.optString("runCommand", "")
-                ));
-            }
-        }
-
-        // UserOutputController penceresini aç ve sonuçları göster
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("resultScene.fxml"));
-        AnchorPane resultScene = loader.load();
-        UserOutputController controller = loader.getController();
-
-        controller.getResultsList().clear();
-        controller.getResultsList().addAll(filteredResults);
-
-        Stage stage = new Stage();
-        stage.setTitle("Results for Config: " + selectedJsonFileName);
-        stage.setScene(new Scene(resultScene));
-        stage.show();
     }
-
 
     @FXML
     public void clearJson() {

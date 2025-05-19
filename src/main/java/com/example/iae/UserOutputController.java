@@ -145,7 +145,7 @@ public class UserOutputController implements Initializable {
                 String expectedOutput = jsonObject.getString("expectedOutput");
                 String result = jsonObject.getString("result");
 
-
+                // Eğer json içinde varsa çek, yoksa boş string ata
                 String language = jsonObject.optString("language", "");
                 String compilerPath = jsonObject.optString("compilerPath", "");
                 String compilerArgs = jsonObject.optString("compilerArgs", "");
@@ -157,12 +157,6 @@ public class UserOutputController implements Initializable {
             e.printStackTrace();
         }
     }
-
-    public ObservableList<UserOutputScene> getResultsList() {
-        return resultsList;
-    }
-
-
 
     @FXML
     private Button deleteStudentButton;
