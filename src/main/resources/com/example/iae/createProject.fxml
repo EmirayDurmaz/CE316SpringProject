@@ -23,7 +23,8 @@
                             <Font size="20.0" />
                         </font>
                     </Label>
-                    <ChoiceBox fx:id="mychoiceBox" styleClass="choice-box" prefWidth="180.0" />
+                    <ChoiceBox fx:id="mychoiceBox" onAction="#choiceBoxChanged"
+                               prefWidth="150.0" style="-fx-background-color: #e8e0a7;"/>
 
                 </HBox>
 
