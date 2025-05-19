@@ -32,6 +32,8 @@ public class Main extends Application {
         stage.show();
     }
 
+
+
     public static void showCreateProject() throws IOException {
         createAndShowModalWindow("createProject.fxml", "Create Project");
     }

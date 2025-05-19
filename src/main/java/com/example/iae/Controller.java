@@ -126,6 +126,8 @@ public class Controller implements Initializable {
                             runcommandfield.getText()                            // runCommand
                     );
 
+
+
                     Main.showResultScene(path,
                             result.getRunOutput(),
                             result.getExpectedOutput(),
