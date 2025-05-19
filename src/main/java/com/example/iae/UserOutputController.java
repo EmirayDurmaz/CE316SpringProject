@@ -99,6 +99,17 @@ public class UserOutputController implements Initializable {
 
             help(helpTXT, "Help");
         });
+        resultsTable.setRowFactory(tv -> {
+            TableRow<UserOutputScene> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    UserOutputScene rowData = row.getItem();
+                    showDetailsPopup(rowData);
+                }
+            });
+            return row ;
+        });
+
 
         showAllResults();
     }
@@ -111,14 +122,16 @@ public class UserOutputController implements Initializable {
         alert.showAndWait();
     }
 
-    public void addResult(String path, String output, String expectedOutput, String result) {
+    public void addResult(String path, String output, String expectedOutput, String result,
+                          String language, String compilerPath, String compilerArgs, String runCommand) {
         for (UserOutputScene existing : resultsList) {
             if (existing.getPath().equals(path)) {
                 return;
             }
         }
-        resultsList.add(new UserOutputScene(path, output, expectedOutput, result));
+        resultsList.add(new UserOutputScene(path, output, expectedOutput, result, language, compilerPath, compilerArgs, runCommand));
     }
+
 
     public void showAllResults() {
         try {
@@ -132,12 +145,19 @@ public class UserOutputController implements Initializable {
                 String expectedOutput = jsonObject.getString("expectedOutput");
                 String result = jsonObject.getString("result");
 
-                addResult(path, runOutput, expectedOutput, result);
+                // Eğer json içinde varsa çek, yoksa boş string ata
+                String language = jsonObject.optString("language", "");
+                String compilerPath = jsonObject.optString("compilerPath", "");
+                String compilerArgs = jsonObject.optString("compilerArgs", "");
+                String runCommand = jsonObject.optString("runCommand", "");
+
+                addResult(path, runOutput, expectedOutput, result, language, compilerPath, compilerArgs, runCommand);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     @FXML
     private Button deleteStudentButton;
 
@@ -251,5 +271,23 @@ public class UserOutputController implements Initializable {
         alert.showAndWait();
     }
 
+    private void showDetailsPopup(UserOutputScene data) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Student Details");
+        alert.setHeaderText("Details for: " + data.getPath());
+
+        StringBuilder content = new StringBuilder();
+        content.append("Language: ").append(data.getLanguage()).append("\n");
+        content.append("Compiler Path: ").append(data.getCompilerPath()).append("\n");
+        content.append("Compiler Arguments: ").append(data.getCompilerArgs()).append("\n");
+        content.append("Run Command: ").append(data.getRunCommand()).append("\n");
+        content.append("\n");
+        content.append("Result: ").append(data.getResult()).append("\n");
+        content.append("Output:\n").append(data.getRunOutput()).append("\n");
+        content.append("Expected Output:\n").append(data.getExpectedOutput()).append("\n");
+
+        alert.setContentText(content.toString());
+        alert.showAndWait();
+    }
 
 }

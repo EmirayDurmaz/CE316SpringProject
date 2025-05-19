@@ -37,15 +37,18 @@ public class Main extends Application {
     }
 
     public static void showResultScene(String filePath, String output,
-                                       String expectedOutput, String result) throws IOException {
+                                       String expectedOutput, String result,
+                                       String language, String compilerPath,
+                                       String compilerArgs, String runCommand) throws IOException {
         FXMLLoader loader = loadFXML("resultScene.fxml");
         AnchorPane resultScene = loader.load();
         UserOutputController controller = loader.getController();
-        controller.addResult(filePath, output, expectedOutput, result);
+        controller.addResult(filePath, output, expectedOutput, result, language, compilerPath, compilerArgs, runCommand);
 
         Stage stage = createModalStage("Result", resultScene);
         stage.showAndWait();
     }
+
 
     private static void createAndShowModalWindow(String fxmlFile, String title) throws IOException {
         FXMLLoader loader = loadFXML(fxmlFile);

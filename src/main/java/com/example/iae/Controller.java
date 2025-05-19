@@ -116,8 +116,25 @@ public class Controller implements Initializable {
                 for (UserOutputScene result : results) {
                     int lastIndex = result.getPath().lastIndexOf("\\");
                     String path = result.getPath().substring(lastIndex + 1);
-                    saveResultToJson(path, result.getRunOutput(), result.getExpectedOutput(), result.getResult());
-                    Main.showResultScene(path, result.getRunOutput(), result.getExpectedOutput(), result.getResult());
+                    saveResultToJson(path,
+                            result.getRunOutput(),
+                            result.getExpectedOutput(),
+                            result.getResult(),
+                            mychoiceBox.getSelectionModel().getSelectedItem(),  // language
+                            compilerPathfield.getText(),                         // compilerPath
+                            compilerInterpreterargsfield.getText(),             // compilerArgs
+                            runcommandfield.getText()                            // runCommand
+                    );
+
+                    Main.showResultScene(path,
+                            result.getRunOutput(),
+                            result.getExpectedOutput(),
+                            result.getResult(),
+                            mychoiceBox.getSelectionModel().getSelectedItem(),
+                            compilerPathfield.getText(),
+                            compilerInterpreterargsfield.getText(),
+                            runcommandfield.getText());
+
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -235,7 +252,16 @@ public class Controller implements Initializable {
             }
 
             result = runOutput.equals(expectedOutput) ? "Correct" : "Incorrect";
-            results.add(new UserOutputScene(adjustPath(path, folder), runOutput, expectedOutput, result));
+            results.add(new UserOutputScene(
+                    adjustPath(path, folder),
+                    runOutput,
+                    expectedOutput,
+                    result,
+                    mychoiceBox.getSelectionModel().getSelectedItem(),   // language
+                    compilerPathfield.getText(),                          // compilerPath
+                    compilerInterpreterargsfield.getText(),              // compilerArgs
+                    runcommandfield.getText()                             // runCommand
+            ));
         }
         return results;
     }
@@ -378,7 +404,8 @@ public class Controller implements Initializable {
         }
     }
 
-    public void saveResultToJson(String path, String runOutput, String expectedOutput, String result) {
+    public void saveResultToJson(String path, String runOutput, String expectedOutput, String result,
+                                 String language, String compilerPath, String compilerArgs, String runCommand) {
         String fileName = "results.json";
         JSONArray jsonArray = new JSONArray();
         try {
@@ -396,6 +423,13 @@ public class Controller implements Initializable {
         jsonObject.put("runOutput", runOutput);
         jsonObject.put("expectedOutput", expectedOutput);
         jsonObject.put("result", result);
+
+        // Yeni alanlar
+        jsonObject.put("language", language);
+        jsonObject.put("compilerPath", compilerPath);
+        jsonObject.put("compilerArgs", compilerArgs);
+        jsonObject.put("runCommand", runCommand);
+
         jsonArray.put(jsonObject);
 
         try (FileWriter fileWriter = new FileWriter(fileName)) {
@@ -404,6 +438,7 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     public void loadSelectedJson() throws IOException {
