@@ -1,0 +1,194 @@
+[
+    {
+        "result": "Correct",
+        "path": "20220602027",
+        "runOutput": "Sinem\n",
+        "expectedOutput": "Sinem\n"
+    },
+    {
+        "result": "Correct",
+        "compilerPath": "javac",
+        "path": "20220602057",
+        "compilerArgs": "Test.java",
+        "runOutput": "Hello World! Java\n",
+        "expectedOutput": "Hello World! Java\n",
+        "language": "JAVA",
+        "runCommand": "java Test"
+    },
+    {
+        "result": "Correct",
+        "compilerPath": "javac",
+        "path": "20220602057",
+        "compilerArgs": "Test.java",
+        "jsonFileName": "JsonFile_1747682094960.json",
+        "runOutput": "Hello World! Java\n",
+        "expectedOutput": "Hello World! Java\n",
+        "language": "JAVA",
+        "runCommand": "java Test"
+    },
+    {
+        "result": "Correct",
+        "compilerPath": "javac",
+        "path": "20220602057",
+        "compilerArgs": "Test.java",
+        "jsonFileName": "JsonFile_1747682094960.json",
+        "runOutput": "Hello World! Java\n",
+        "expectedOutput": "Hello World! Java\n",
+        "language": "JAVA",
+        "runCommand": "java Test"
+    },
+    {
+        "result": "Correct",
+        "compilerPath": "javac",
+        "path": "20220602057",
+        "compilerArgs": "Test.java",
+        "jsonFileName": "JsonFile_1747682094960.json",
+        "runOutput": "Hello World! Java\n",
+        "expectedOutput": "Hello World! Java\n",
+        "language": "JAVA",
+        "runCommand": "java Test"
+    },
+    {
+        "result": "Correct",
+        "compilerPath": "javac",
+        "path": "20220602057",
+        "compilerArgs": "Test.java",
+        "jsonFileName": "JsonFile_1747682094960.json",
+        "runOutput": "Hello World! Java\n",
+        "expectedOutput": "Hello World! Java\n",
+        "language": "JAVA",
+        "runCommand": "java Test"
+    },
+    {
+        "result": "Correct",
+        "compilerPath": "javac",
+        "path": "20220602057",
+        "compilerArgs": "Test.java",
+        "jsonFileName": "JsonFile_1747679588285.json",
+        "runOutput": "Hello World! Java\n",
+        "expectedOutput": "Hello World! Java\n",
+        "language": "JAVA",
+        "runCommand": "java Test"
+    },
+    {
+        "result": "Correct",
+        "compilerPath": "javac",
+        "path": "20220602057",
+        "compilerArgs": "Test.java",
+        "jsonFileName": "JsonFile_1747684122782.json",
+        "runOutput": "Hello World! Java\n",
+        "expectedOutput": "Hello World! Java\n",
+        "language": "JAVA",
+        "runCommand": "java Test"
+    },
+    {
+        "result": "Correct",
+        "compilerPath": "javac",
+        "path": "20220602057",
+        "compilerArgs": "Test.java",
+        "jsonFileName": "JsonFile_1747679588285.json",
+        "runOutput": "Hello World! Java\n",
+        "expectedOutput": "Hello World! Java\n",
+        "language": "JAVA",
+        "runCommand": "java Test"
+    },
+    {
+        "result": "Correct",
+        "compilerPath": "javac",
+        "path": "20220602057",
+        "compilerArgs": "Test.java",
+        "jsonFileName": "JsonFile_1747684414190.json",
+        "runOutput": "Hello World! Java\n",
+        "expectedOutput": "Hello World! Java\n",
+        "language": "JAVA",
+        "runCommand": "java Test"
+    },
+    {
+        "result": "Correct",
+        "compilerPath": "javac",
+        "path": "20220602057",
+        "compilerArgs": "Test.java",
+        "jsonFileName": "JsonFile_1747684414190.json",
+        "runOutput": "Hello World! Java\n",
+        "expectedOutput": "Hello World! Java\n",
+        "language": "JAVA",
+        "runCommand": "java Test"
+    },
+    {
+        "result": "Correct",
+        "compilerPath": "javac",
+        "path": "20220602057",
+        "compilerArgs": "Test.java",
+        "jsonFileName": "JsonFile_1747684414190.json",
+        "runOutput": "Hello World! Java\n",
+        "expectedOutput": "Hello World! Java\n",
+        "language": "JAVA",
+        "runCommand": "java Test"
+    },
+    {
+        "result": "Correct",
+        "compilerPath": "javac",
+        "path": "20220602057",
+        "compilerArgs": "Test.java",
+        "jsonFileName": "JsonFile_1747684638688.json",
+        "runOutput": "Hello World! Java\n",
+        "expectedOutput": "Hello World! Java\n",
+        "language": "JAVA",
+        "runCommand": "java Test"
+    },
+    {
+        "result": "Correct",
+        "compilerPath": "javac",
+        "path": "20220602057",
+        "compilerArgs": "Test.java",
+        "jsonFileName": "JsonFile_1747684638688.json",
+        "runOutput": "Hello World! Java\n",
+        "expectedOutput": "Hello World! Java\n",
+        "language": "JAVA",
+        "runCommand": "java Test"
+    },
+    {
+        "result": "Correct",
+        "compilerPath": "javac",
+        "path": "20220602057",
+        "compilerArgs": "Test.java",
+        "jsonFileName": "JsonFile_1747684638688.json",
+        "runOutput": "Hello World! Java\n",
+        "expectedOutput": "Hello World! Java\n",
+        "language": "JAVA",
+        "runCommand": "java Test"
+    },
+    {
+        "result": "Correct",
+        "compilerPath": "javac",
+        "path": "20220602057",
+        "compilerArgs": "Test.java",
+        "jsonFileName": "JsonFile_1747684414190.json",
+        "runOutput": "Hello World! Java\n",
+        "expectedOutput": "Hello World! Java\n",
+        "language": "JAVA",
+        "runCommand": "java Test"
+    },
+    {
+        "result": "Correct",
+        "compilerPath": "javac",
+        "path": "20220602057",
+        "compilerArgs": "Test.java",
+        "jsonFileName": "JsonFile_1747684414190.json",
+        "runOutput": "Hello World! Java\n",
+        "expectedOutput": "Hello World! Java\n",
+        "language": "JAVA",
+        "runCommand": "java Test"
+    },
+    {
+        "result": "Correct",
+        "compilerPath": "javac",
+        "path": "20220602057",
+        "compilerArgs": "Test.java",
+        "jsonFileName": "JsonFile_1747684414190.json",
+        "runOutput": "Hello World! Java\n",
+        "expectedOutput": "Hello World! Java\n",
+        "language": "JAVA",
+        "runCommand": "java Test"
+    }
+]

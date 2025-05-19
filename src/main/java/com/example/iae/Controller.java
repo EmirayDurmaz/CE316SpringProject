@@ -10,10 +10,16 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.Region;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,7 +28,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -99,16 +107,19 @@ public class Controller implements Initializable {
                 e.printStackTrace();
             }
         }
-
+        // Örnek: savesChoiceBox listener içine
         savesChoiceBox.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
                 try {
                     loadSelectedJson();
+                    openConfigDetailsWindow(newVal);  // Bu fonksiyon yukarıdaki gibi tanımlanmalı
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         });
+
+
 
         okeyButton.setOnAction(actionEvent -> {
             try {
@@ -120,11 +131,13 @@ public class Controller implements Initializable {
                             result.getRunOutput(),
                             result.getExpectedOutput(),
                             result.getResult(),
-                            mychoiceBox.getSelectionModel().getSelectedItem(),  // language
-                            compilerPathfield.getText(),                         // compilerPath
-                            compilerInterpreterargsfield.getText(),             // compilerArgs
-                            runcommandfield.getText()                            // runCommand
-                    );
+                            mychoiceBox.getSelectionModel().getSelectedItem(),
+                            compilerPathfield.getText(),
+                            compilerInterpreterargsfield.getText(),
+                            runcommandfield.getText(),
+                            savesChoiceBox.getSelectionModel().getSelectedItem());  // json dosya adı burada verilmeli
+
+
 
                     Main.showResultScene(path,
                             result.getRunOutput(),
@@ -405,9 +418,12 @@ public class Controller implements Initializable {
     }
 
     public void saveResultToJson(String path, String runOutput, String expectedOutput, String result,
-                                 String language, String compilerPath, String compilerArgs, String runCommand) {
+                                 String language, String compilerPath, String compilerArgs, String runCommand,
+                                 String jsonFileName) {  // jsonFileName parametresi ekli
+
         String fileName = "results.json";
         JSONArray jsonArray = new JSONArray();
+
         try {
             File file = new File(fileName);
             if (file.exists()) {
@@ -424,11 +440,13 @@ public class Controller implements Initializable {
         jsonObject.put("expectedOutput", expectedOutput);
         jsonObject.put("result", result);
 
-        // Yeni alanlar
         jsonObject.put("language", language);
         jsonObject.put("compilerPath", compilerPath);
         jsonObject.put("compilerArgs", compilerArgs);
         jsonObject.put("runCommand", runCommand);
+
+        // BURASI ÇOK ÖNEMLİ, mutlaka ekle:
+        jsonObject.put("jsonFileName", jsonFileName);
 
         jsonArray.put(jsonObject);
 
@@ -438,6 +456,8 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
     }
+
+
 
 
     @FXML
@@ -549,6 +569,19 @@ public class Controller implements Initializable {
         } else {
             System.out.println("Export cancelled by user.");
         }
+    }
+    private void openConfigDetailsWindow(String jsonFileName) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/iae/configDetails.fxml"));
+        Parent root = loader.load();
+
+        ConfigDetailsController controller = loader.getController();
+        controller.loadConfigAndResults(jsonFileName);
+
+        Stage stage = new Stage();
+        stage.setTitle("Config Details - " + jsonFileName);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
     }
 
 
