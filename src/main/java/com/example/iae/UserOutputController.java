@@ -158,6 +158,9 @@ public class UserOutputController implements Initializable {
         }
     }
 
+    public ObservableList<UserOutputScene> getResultsList() {
+        return resultsList;
+    }
 
 
 
