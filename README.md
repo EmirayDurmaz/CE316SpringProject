@@ -20,7 +20,7 @@
 
 ## Installation
 1. **Using the Installer**:
-   - Download `IAE-Setup.exe` from [Releases](https://github.com/yourusername/ce316-iae/releases)
+   - Download `IAE.exe` from [Releases](https://github.com/yourusername/ce316-iae/releases)
    - Run the installer and follow the instructions
    - A desktop shortcut will be created automatically
 
